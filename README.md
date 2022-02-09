@@ -4,7 +4,7 @@ C3_ANDROID MOBILE DEVELOPMENT
 420-DA4-AS - sect. 07472
 
 Members:
-Albelis Beccea,
+Albelis Becea,
 Amanda Chun,
 Gabriel Paz,
 Jagrut Gosai,

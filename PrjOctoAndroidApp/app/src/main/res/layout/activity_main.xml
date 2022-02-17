@@ -4,36 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#CEB8F1F8"
+    >
 
     <TextView
-        android:id="@+id/tvWriteSomething"
+        android:id="@+id/tvWelcome"
+        style="@style/Titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Write something"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/andika_new_basic_bold"
+        android:text="Welcome to"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edTextToSay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Write here"
-        app:layout_constraintBaseline_toBaselineOf="@id/tvWriteSomething"
-        app:layout_constraintLeft_toRightOf="@id/tvWriteSomething" />
-
-    <Button
-        android:id="@+id/btnSpeak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speak"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWriteSomething"
-        android:layout_marginTop="50dp"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:srcCompat="@mipmap/octo_logo_v2_round"
+        android:contentDescription="@string/octologo" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

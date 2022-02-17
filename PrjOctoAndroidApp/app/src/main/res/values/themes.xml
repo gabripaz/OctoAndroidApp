@@ -13,4 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Titles">
+        <item name="fontFamily">andika_new_basic_bold</item>
+        <item name="backgroundColor">#F0A1DBEA</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/octo_logo_v1_background</item>
+        <item name="android:shadowColor">@color/text_shadow</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
 </resources>

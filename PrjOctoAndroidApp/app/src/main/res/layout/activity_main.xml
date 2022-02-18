@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#CEB8F1F8"
+
     >
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/adobestock_107576651"
+        android:contentDescription="background" />
 
     <TextView
         android:id="@+id/tvWelcome"
@@ -15,22 +27,63 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/andika_new_basic_bold"
-        android:text="Welcome to"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Welcome to"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgOctoLogo"
         android:layout_width="192dp"
         android:layout_height="192dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-        app:srcCompat="@mipmap/octo_logo_v2_round"
+        app:srcCompat="@mipmap/octo_logo_v3_round"
         android:contentDescription="@string/octologo" />
+
+    <Button
+        style="@style/buttons"
+        android:id="@+id/btnRegister"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgOctoLogo"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#9C27B0"
+        android:text="Register"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+    <Button
+        style="@style/buttons"
+        android:id="@+id/btnLogin"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        android:backgroundTint="#651FE1"
+        android:layout_marginTop="15dp"
+        android:text="Login"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+    <Button
+        style="@style/buttons"
+        android:id="@+id/btnStart"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        android:backgroundTint="#D6104E"
+        android:layout_marginTop="15dp"
+        android:textSize="30sp"
+        android:text="Start"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

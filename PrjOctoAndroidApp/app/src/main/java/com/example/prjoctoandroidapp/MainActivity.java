@@ -2,6 +2,7 @@ package com.example.prjoctoandroidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -11,15 +12,53 @@ import android.widget.EditText;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //    private TextToSpeech textToSpeech;
 //    private EditText edText;
 //    private Button btnSpeech;
+    Button btnCreateAcc, btnLogin, btnStart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // intialize();
+        initialize();
+    }
+
+    private void initialize() {
+            btnLogin     = findViewById(R.id.btnLogin);
+            btnCreateAcc = findViewById(R.id.btnRegister);
+            btnStart     = findViewById(R.id.btnStart);
+            
+            btnLogin.setOnClickListener(this);
+            btnCreateAcc.setOnClickListener(this);
+            btnStart.setOnClickListener(this);
+   
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case (R.id.btnLogin):
+                goLogin();
+                break;
+            case(R.id.btnRegister):
+                goCreateAcc();
+                break;
+            case(R.id.btnStart):
+                goStart();
+                break;
+        }
+    }
+
+    private void goStart() {
+    }
+
+    private void goCreateAcc() {
+        Intent intent = new Intent(this,Registration.class);
+        startActivity(intent);
+    }
+
+    private void goLogin() {
     }
 //
 //    private void intialize() {

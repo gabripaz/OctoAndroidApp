@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void goLogin() {
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
     }
 //
 //    private void intialize() {

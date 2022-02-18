@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PrjOctoAndroidApp</string>
     <string name="octologo">octoLogo</string>
+    <string name="Octo">Octo</string>
 </resources>

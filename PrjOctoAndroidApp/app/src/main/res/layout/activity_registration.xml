@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Titles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Create your Profile" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="15dp"
+        android:labelFor="@id/edUsername"
+        android:text="Username :" />
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="username"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text=""
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvUsername"
+        app:layout_constraintLeft_toRightOf="@id/tvUsername" />
+
+    <TextView
+        android:id="@+id/tvFullName"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tvUsername"
+        app:layout_constraintTop_toBottomOf="@id/tvUsername"
+        android:layout_marginTop="25dp"
+        android:labelFor="@id/edFullName"
+        android:text="Parent Name :" />
+
+    <EditText
+        android:id="@+id/edFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="Full name, Parent name"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text=""
+        app:layout_constraintBaseline_toBaselineOf="@id/tvFullName"
+        app:layout_constraintStart_toStartOf="@id/edUsername" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvFullName"
+        app:layout_constraintStart_toStartOf="@id/tvFullName"
+        android:layout_marginTop="25dp"
+        android:labelFor="@id/edEmail"
+        android:text="Email :" />
+
+    <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="emailAddress"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvEmail"
+        app:layout_constraintStart_toStartOf="@id/edFullName" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintStart_toStartOf="@id/tvEmail"
+        android:layout_marginTop="25dp"
+        android:labelFor="@id/edPassword"
+        android:text="Enter Password :" />
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="password"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvPassword"
+        app:layout_constraintStart_toStartOf="@id/edEmail" />
+
+    <TextView
+        android:id="@+id/tvRepPass"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintStart_toStartOf="@id/tvPassword"
+        android:layout_marginTop="25dp"
+        android:labelFor="@id/edRepPass"
+        android:text="Repeat Password :" />
+
+    <EditText
+        android:id="@+id/edRepPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="Repeat Password"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvRepPass"
+        app:layout_constraintStart_toStartOf="@id/edPassword" />
+
+    <Button
+        android:id="@+id/btnCreateAcc"
+        style="@style/buttons"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edRepPass"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#D6104E"
+        android:text="Create"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+    <Button
+        android:id="@+id/btnReturn"
+        style="@style/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:textAllCaps="false"
+        android:text="Return"
+        android:backgroundTint="@color/purple_500"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

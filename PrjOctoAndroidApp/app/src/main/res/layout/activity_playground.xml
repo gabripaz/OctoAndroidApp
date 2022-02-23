@@ -24,7 +24,6 @@
         android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         android:layout_marginTop="15dp"
         android:layout_marginStart="120dp"
         app:srcCompat="@mipmap/octo_logo_v3_round"

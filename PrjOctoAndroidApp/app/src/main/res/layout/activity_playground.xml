@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlaygroundActivity">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/adobestock_107576651"
+        android:contentDescription="background" />
+
+    <ImageView
+        android:id="@+id/imgOctoLogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="120dp"
+        app:srcCompat="@mipmap/octo_logo_v3_round"
+        android:contentDescription="@string/octologo" />
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Titles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/andika_new_basic_bold"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@id/imgOctoLogo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:text="Hello"/>
+
+
+
+    <ImageView
+        android:id="@+id/imgKidsAvatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        style="@style/SubTitles"
+        android:id="@+id/tvKidsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintLeft_toRightOf="@id/imgKidsAvatar"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:text="Kids Name / nickname" />
+
+
+    <TextView
+        style="@style/SubTitles"
+        android:id="@+id/tvLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tvKidsName"
+        app:layout_constraintTop_toBottomOf="@id/tvKidsName"
+        android:layout_marginTop="5dp"
+        android:text="Level :" />
+
+    <TextView
+        style="@style/SubTitles"
+        android:id="@+id/tvKidsLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvLevel"
+        app:layout_constraintLeft_toRightOf="@id/tvLevel"
+        android:layout_marginStart="20dp"
+        android:text="05" />
+
+    <TextView
+        style="@style/SubTitles"
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tvLevel"
+        app:layout_constraintTop_toBottomOf="@id/tvLevel"
+        android:text="Points :" />
+
+    <TextView
+        android:id="@+id/tvKidsPoints"
+        style="@style/SubTitles"
+        android:layout_width="32dp"
+        android:layout_height="29dp"
+        android:text="5665"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvPoints"
+        app:layout_constraintStart_toStartOf="@id/tvKidsLevel" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        style="@style/SubTitles_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvKidsPoints"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="25dp"
+        android:text="What do you want to play?" />
+
+    <Button
+        style="@style/buttons"
+        android:id="@+id/btnQuestionsAnswers"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        android:layout_marginTop="35dp"
+        android:textSize="25sp"
+        android:backgroundTint="#FFC107"
+        android:textAllCaps="false"
+        android:text="Questions and Answers"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+
+    <Button
+        style="@style/buttons"
+        android:id="@+id/btnImageExplorer"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnQuestionsAnswers"
+        android:backgroundTint="#D6104E"
+        android:layout_marginTop="35dp"
+        android:textSize="25sp"
+        android:textAllCaps="false"
+        android:text="Image Explorer"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+    <Button
+        android:id="@+id/btnReturn"
+        style="@style/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:textAllCaps="false"
+        android:text="Return"
+        android:backgroundTint="@color/purple_500"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void goStart() {
+        Intent intent = new Intent(this,PlaygroundActivity.class);
+        startActivity(intent);
     }
 
     private void goCreateAcc() {

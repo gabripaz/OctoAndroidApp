@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import model.OctoUser;
+import model.Speaker;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
     EditText edUsernameEmail, edPassword;
@@ -58,11 +59,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void loginIntoAcc() {
         String username;
         username = edUsernameEmail.getText().toString();
+        //TO BE REMOVED!!!!!!!!////////////////////
+        Speaker.SpeakThis(this,username);   //TESTING REMOVE IF ITS WORKING
+        Speaker.Destroy();
+        ///////////////////////////////////////////
         DatabaseReference userChild;
         userChild = octoDB.child(username);
         userChild.addValueEventListener(this);
-
-
     }
     private void goBack() {
         finish();

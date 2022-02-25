@@ -1,16 +1,23 @@
 package com.example.prjoctoandroidapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-//import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,8 +32,11 @@ import model.OctoUser;
 public class Registration extends AppCompatActivity implements View.OnClickListener {
     EditText edUsername,edFullName, edEmail, edPassword, edRepPassword;
     Button btnCreate,btnReturn;
+    ProgressBar progressBar;
 
+    private static final String TAG = "EmailPassword";
     DatabaseReference octoDB;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +53,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         edRepPassword =  findViewById(R.id.edRepPass);
         btnCreate     =  findViewById(R.id.btnCreateAcc);
         btnReturn     =  findViewById(R.id.btnReturn);
+        progressBar   =  findViewById(R.id.progressBar_reg);
 
         btnCreate.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
@@ -53,6 +64,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         edEmail.addTextChangedListener(new ValidatorTextWatcher(edEmail));
 
         octoDB  = FirebaseDatabase.getInstance().getReference("user");
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -80,16 +92,49 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         fullname = edFullName.getText().toString();
         email    = edEmail.getText().toString();
         password = edPassword.getText().toString();
+        progressBar.setVisibility(View.VISIBLE);
+        //TESTING FIREBASE AUTH
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    sentToMain();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Error "+task.getException().toString()+" \n account no created", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        //END TEST
 
         OctoUser user = new OctoUser(uniqueID,username,fullname,email,password);
 
         octoDB.child(uniqueID).setValue(user);
           finish();
     }
-
     private void goBack() {
         finish();
     }
+
+    //TESTING FIREBASE AUTHENTICATION
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currUser != null){
+            //sentToMain();
+            Toast.makeText(this,"No users register yet", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private void sentToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    //END TEST
+
 
 //GABRIEL TEST CODE
 //    private void comparePassword(View view) {
@@ -208,6 +253,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+
 
     private class ValidatorTextWatcher implements TextWatcher {
         private View view;

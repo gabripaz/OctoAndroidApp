@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Locale;
 
@@ -64,6 +68,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
+
+    //TESTING FIREBASE AUTHENTICATION
+     @Override
+    protected void onStart() {
+         super.onStart();
+         FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
+         if(currUser == null){
+             Toast.makeText(this,"No users register yet", Toast.LENGTH_SHORT).show();
+//
+//             Intent intent = new Intent(this, LoginActivity.class);
+//             startActivity(intent);
+//             finish();
+         }
+     }
+
+    //END OF TEST
 //
 //    private void intialize() {
 //        btnSpeech = findViewById(R.id.btnSpeak);

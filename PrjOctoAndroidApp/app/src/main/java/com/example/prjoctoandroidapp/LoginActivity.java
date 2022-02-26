@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                       sentToUserAcc();
+                       sentToMainActivity();
                     }else{
                         String error = task.getException().getMessage();
                         Toast.makeText(getApplicationContext(),"Error "+error,Toast.LENGTH_LONG).show();
@@ -90,9 +90,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //
     }
 
-    private void sentToUserAcc() {
-        Intent intent = new Intent(this,UserAccountActivity.class);
-        intent.putExtra("currentUser", mAuth.getCurrentUser().toString());
+    private void sentToMainActivity() {
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }

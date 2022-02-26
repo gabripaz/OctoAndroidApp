@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    private TextToSpeech textToSpeech;
 //    private EditText edText;
 //    private Button btnSpeech;
-    Button btnCreateAcc, btnLogin, btnStart;
+    Button btnCreateAcc, btnLogin, btnStart, btnConfigAcc, btnLogout;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +33,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnLogin     = findViewById(R.id.btnLogin);
             btnCreateAcc = findViewById(R.id.btnRegister);
             btnStart     = findViewById(R.id.btnStart);
+            btnConfigAcc = findViewById(R.id.btnConfigAcc);
+            btnLogout    = findViewById(R.id.btnLogout);
             
             btnLogin.setOnClickListener(this);
             btnCreateAcc.setOnClickListener(this);
             btnStart.setOnClickListener(this);
+            btnConfigAcc.setOnClickListener(this);
+            btnLogout.setOnClickListener(this);
+
+            mAuth = FirebaseAuth.getInstance();
    
     }
 
@@ -51,7 +58,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case(R.id.btnStart):
                 goStart();
                 break;
+            case(R.id.btnConfigAcc):
+                goUserAcc();
+                break;
+            case(R.id.btnLogout):
+                logout();
+                break;
         }
+    }
+
+    private void logout() {
+        mAuth.signOut();
+        restartActivity();
+    }
+    private void restartActivity(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+    private void goUserAcc() {
+        Intent intent = new Intent(this,UserAccountActivity.class);
+        startActivity(intent);
     }
 
     private void goStart() {
@@ -62,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void goCreateAcc() {
         Intent intent = new Intent(this,Registration.class);
         startActivity(intent);
+
     }
 
     private void goLogin() {
@@ -76,12 +103,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
          if(currUser == null){
              //I tried to make the start button invisible or gone if the user is not logged but is not working I don't know why
-             //btnStart.setVisibility(View.GONE);
+             btnStart.setVisibility(View.GONE);
+             btnLogout.setVisibility(View.GONE);
+             btnConfigAcc.setVisibility(View.GONE);
              Toast.makeText(this,"No users login yet", Toast.LENGTH_SHORT).show();
 //
 //             Intent intent = new Intent(this, LoginActivity.class);
 //             startActivity(intent);
 //             finish();
+         }
+         else{
+             btnStart.setVisibility(View.VISIBLE);
+             btnLogout.setVisibility(View.VISIBLE);
+             btnConfigAcc.setVisibility(View.VISIBLE);
+             btnLogin.setVisibility(View.GONE);
+             btnCreateAcc.setVisibility(View.GONE);
          }
      }
 

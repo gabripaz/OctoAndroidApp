@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPlayerActivity">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/adobestock_107576651"
+        android:contentDescription="background" />
+    <TextView
+        android:id="@+id/tvUsernameLbl"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        android:labelFor="@id/tvUsername"
+        android:text="User :" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvUsernameLbl"
+        app:layout_constraintStart_toEndOf="@id/tvUsernameLbl"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="5dp"
+        android:textSize="15sp"
+        android:text="display user name" />
+    <TextView
+        android:id="@+id/tvEmailLbl"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvUsername"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvUsername"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:labelFor="@id/tvEmail"
+        android:text="Email :" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/SubTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvEmailLbl"
+        app:layout_constraintStart_toEndOf="@id/tvEmailLbl"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:textSize="15sp"
+        android:labelFor="@id/edUsernameEmail"
+        android:text="display email" />
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Titles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailLbl"
+        android:text="Add Octo Player" />
+
+    <TextView
+        android:id="@+id/tvNicknameLb"
+        style="@style/SubTitles_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:labelFor="@id/edNickname"
+        android:text="Nickname :" />
+
+    <EditText
+        android:id="@+id/edNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edit_text"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@id/tvNicknameLb"
+        android:layout_marginStart="5dp"
+        android:textAlignment="center"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvNicknameLb"
+        app:layout_constraintTop_toBottomOf="@id/tvNicknameLb"
+        />
+    <TextView
+        android:id="@+id/tvAgeLb"
+        style="@style/SubTitles_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edNickname"
+        app:layout_constraintStart_toStartOf="@id/tvNicknameLb"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:labelFor="@id/edAge"
+        android:text="Age :" />
+
+    <EditText
+        android:id="@+id/edAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvAgeLb"
+        app:layout_constraintStart_toStartOf="@id/edNickname"
+        android:background="@drawable/round_edit_text"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:text=""
+
+        app:layout_constraintTop_toBottomOf="@id/tvAgeLb" />
+    <TextView
+        android:id="@+id/tvAavtarLb"
+        style="@style/SubTitles_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edAge"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:textSize="25sp"
+        android:labelFor="@id/edUsernameEmail"
+        android:text="Select Avatar" />
+
+    <ImageButton
+        android:id="@+id/imgAvatarOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAavtarLb"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="65dp"
+        app:srcCompat="@drawable/avatar_one" />
+
+    <ImageButton
+        android:id="@+id/imgAvatarTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvAavtarLb"
+        app:layout_constraintLeft_toRightOf="@id/imgAvatarOne"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        app:srcCompat="@drawable/avatar_two" />
+
+    <ImageButton
+        android:id="@+id/imgAvatarThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgAvatarOne"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarOne"
+        app:srcCompat="@drawable/avatar_three" />
+
+    <ImageButton
+        android:id="@+id/imgAvatarFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imgAvatarTwo"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarOne"
+        app:srcCompat="@drawable/avatar_four" />
+
+
+
+    <Button
+        android:id="@+id/btnLog"
+        style="@style/buttons"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarThree"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#D6104E"
+        android:text="Add Player"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+
+    <Button
+        android:id="@+id/btnReturn"
+        style="@style/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:textAllCaps="false"
+        android:text="Return"
+        android:backgroundTint="@color/purple_500"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

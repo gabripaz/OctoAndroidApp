@@ -53,16 +53,16 @@
         android:id="@+id/edUsernameEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edit_text"
         android:ems="10"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:text=""
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername"
-        android:layout_marginTop="5dp"
-        android:textAlignment="center"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/round_edit_text"
-        android:text=""
-       />
+        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
     <TextView
         android:id="@+id/tvPassword"
         style="@style/SubTitles"
@@ -81,15 +81,16 @@
         android:id="@+id/edPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edit_text"
         android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:text=""
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
-        android:layout_marginTop="5dp"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:background="@drawable/round_edit_text"
-        android:text="" />
+        app:layout_constraintTop_toBottomOf="@id/tvPassword" />
 
     <Button
         android:id="@+id/btnLog"

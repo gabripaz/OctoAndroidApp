@@ -222,7 +222,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             Boolean matchRegex;
 
 
-            matchRegex  = Pattern.matches("^[A-Z](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{4,10}$", password);
+            matchRegex  = Pattern.matches("^[A-Z](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$", password);
 
             if(!matchRegex){
 

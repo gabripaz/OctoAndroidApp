@@ -12,11 +12,11 @@ public class OctoUser implements Serializable {
     public OctoUser() {
     }
 
-    public OctoUser(String username, String fullname, String email, String password) {
+    public OctoUser(String username, String fullname, String email) {
         this.username = username;
         this.fullname = fullname;
         this.email = email;
-        this.password = password;
+
     }
 
     public OctoUser(String userId, String username, String fullname, String email, String password) {

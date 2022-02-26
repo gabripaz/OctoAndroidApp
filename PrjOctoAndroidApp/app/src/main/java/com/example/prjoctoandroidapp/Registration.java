@@ -22,8 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.util.Objects;
 
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import model.OctoUser;
@@ -34,7 +34,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     Button btnCreate,btnReturn;
     ProgressBar progressBar;
 
-    private static final String TAG = "EmailPassword";
     DatabaseReference octoDB;
     private FirebaseAuth mAuth;
 
@@ -84,20 +83,23 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
       if(!validatePassword()){return;}
       if(!validateFullname()){return;}
       if(!validateUsername()){return;}
-        String uniqueID, fullname, username, email,password;
+        String  fullname, username, email,password;
 
-        uniqueID = UUID.randomUUID().toString();
-//        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         username = edUsername.getText().toString();
         fullname = edFullName.getText().toString();
         email    = edEmail.getText().toString();
         password = edPassword.getText().toString();
         progressBar.setVisibility(View.VISIBLE);
-        //TESTING FIREBASE AUTH
+        //FIREBASE AUTH
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    //Inserting the rest of the data in the database
+                    OctoUser user = new OctoUser(username,fullname,email);
+                    octoDB.child(uid).setValue(user);
                     sentToMain();
                 }else{
                     Toast.makeText(getApplicationContext(),"Error "+task.getException().toString()+" \n account no created", Toast.LENGTH_LONG).show();
@@ -105,18 +107,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        //END TEST
+        //FIREBASE AUTH
 
-        OctoUser user = new OctoUser(uniqueID,username,fullname,email,password);
-
-        octoDB.child(uniqueID).setValue(user);
-          finish();
     }
     private void goBack() {
         finish();
     }
 
-    //TESTING FIREBASE AUTHENTICATION
+    //FIREBASE AUTHENTICATION
     @Override
     protected void onStart() {
         super.onStart();
@@ -133,7 +131,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
-    //END TEST
+
 
 
 //GABRIEL TEST CODE

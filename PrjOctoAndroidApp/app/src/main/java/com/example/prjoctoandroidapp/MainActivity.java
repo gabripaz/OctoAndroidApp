@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          super.onStart();
          FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
          if(currUser == null){
-             Toast.makeText(this,"No users register yet", Toast.LENGTH_SHORT).show();
+             //I tried to make the start button invisible or gone if the user is not logged but is not working I don't know why
+             //btnStart.setVisibility(View.GONE);
+             Toast.makeText(this,"No users login yet", Toast.LENGTH_SHORT).show();
 //
 //             Intent intent = new Intent(this, LoginActivity.class);
 //             startActivity(intent);

@@ -17,16 +17,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import model.OctoUser;
 import model.Speaker;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     EditText edUsernameEmail, edPassword;
     Button btnLogin, btnReturn;
 
@@ -82,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                        sentToUserAcc();
                     }else{
                         String error = task.getException().getMessage();
-                        Toast.makeText(getApplicationContext(),"Error "+error+"\n  there is not users with that credentials",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Error "+error,Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -91,9 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Speaker.SpeakThis(this,email);   //TESTING REMOVE IF ITS WORKING
         Speaker.Destroy();
         ///////////////////////////////////////////
-//        DatabaseReference userChild;
-//        userChild = octoDB.child(email);
-//        userChild.addValueEventListener(this);
+//
     }
 
     private void sentToUserAcc() {
@@ -107,36 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//        String usernameEmail, password, dbPassword, fullName,email;
-//        usernameEmail = edUsernameEmail.getText().toString();
-//        if(snapshot.exists()){
-//            password=edPassword.getText().toString();
-//            dbPassword = snapshot.child("password").getValue().toString();
-//            if(password.compareTo(dbPassword)==0){
-//                fullName = snapshot.child("fullname").getValue().toString();
-//                email = snapshot.child("email").getValue().toString();
-//                OctoUser currUser = new OctoUser(usernameEmail, fullName,email,password);
-//                Intent intent = new Intent(this, UserAccountActivity.class);
-//                intent.putExtra("currentUser", currUser);
-//                startActivity(intent);
-//
-//            }else{
-//                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-//                edPassword.setText(null);
-//            }
-//        }else{
-//            Toast.makeText(this,"The username "+usernameEmail+" does not exist. Verify or create an account", Toast.LENGTH_SHORT).show();
-//        }
-
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-
-    }
-    //TESTING FIREBASE AUTHENTICATION
+    //TESTING FIREBASE AUTHENTICATION I might remove this later
     @Override
     protected void onStart() {
         super.onStart();
@@ -148,4 +113,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            finish();
         }
     }
+    //END TEST
 }

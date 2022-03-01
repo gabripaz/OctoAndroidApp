@@ -7,53 +7,44 @@ import android.view.View;
 
 import java.util.Locale;
 
-public class Speaker implements TextToSpeech.OnInitListener {
-    private static TextToSpeech textToSpeech ;
-    public static void SpeakThis(Context context, String message){
-        if (textToSpeech == null) {
-            textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-                @Override
-                public void onInit(int i) {
-                    if(i == TextToSpeech.SUCCESS){ //validates the initialization
-                        int res = textToSpeech.setLanguage(Locale.ENGLISH);
-                        switch (res){
-                            case TextToSpeech.LANG_MISSING_DATA:
-                            case TextToSpeech.LANG_NOT_SUPPORTED:
-                                Log.e("Text to Speech", "Language not supported");
-                                break;
+public class Speaker {
+    private static TextToSpeech engine;
+
+
+    public static void speak(Context context, String text){
+        engine = new TextToSpeech(context,
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int i) {
+                        if(i == TextToSpeech.SUCCESS){
+                            int res = engine.setLanguage(Locale.US);
+                            switch (res){
+                                case TextToSpeech.LANG_MISSING_DATA:
+                                case TextToSpeech.LANG_NOT_SUPPORTED:
+                                    Log.e("TTS","Language not supported");
+                                    break;
+                            }
+                        } else{
+                            Log.e("TTS","Initialization Failed");
                         }
-                    }else{
-                        Log.e("Text to Speech", "Initialization Failed");
                     }
-                }
-            });
-        }
-        try{
-            textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, null);
-        }catch (Exception e)
-        {
-            textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null);
-        }
-
+                });
+        speak(text);
+        destroy();
 
     }
 
-    //just for security
-    public static void Destroy() {
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            textToSpeech = null;
-        }
+    private static void speak(String text) {
+        engine.setPitch(1f);
+        engine.setSpeechRate(1f);
+        engine.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    @Override
-    public void onInit(int i) {
-        if (i == TextToSpeech.SUCCESS) {
-            textToSpeech.setLanguage(Locale.GERMAN);
-            textToSpeech.setPitch(3);
-            textToSpeech.speak("TESTIN 123 TESTING", TextToSpeech.QUEUE_FLUSH, null,null);
-            while(textToSpeech.isSpeaking());
+
+    protected static void destroy() {
+        if (engine != null) {
+            engine.stop();
+            engine.shutdown();
         }
     }
 }

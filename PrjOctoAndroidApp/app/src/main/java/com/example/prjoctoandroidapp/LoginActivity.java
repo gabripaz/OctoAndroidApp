@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +22,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+
 import model.Speaker;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     EditText edUsernameEmail, edPassword;
     Button btnLogin, btnReturn;
+    TextToSpeech tts;
 
     DatabaseReference octoDB;
     private FirebaseAuth mAuth;
@@ -49,6 +54,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         octoDB  = FirebaseDatabase.getInstance().getReference("user");
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.login_progressBar);
+
+        tts = new TextToSpeech(this.getApplicationContext(),
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int i) {
+                        if(i == TextToSpeech.SUCCESS){
+                            int res = tts.setLanguage(Locale.US);
+                            switch (res){
+                                case TextToSpeech.LANG_MISSING_DATA:
+                                case TextToSpeech.LANG_NOT_SUPPORTED:
+                                    Log.e("TTS","Language not supported");
+                                    break;
+                            }
+                        } else{
+                            Log.e("TTS","Initialization Failed");
+                        }
+                    }
+                });
     }
 
     @Override
@@ -84,8 +107,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         }
         //TO BE REMOVED!!!!!!!!////////////////////
-        Speaker.SpeakThis(this,email);   //TESTING REMOVE IF ITS WORKING
-        Speaker.Destroy();
+        /*Speaker.SpeakThis(this,email);   //TESTING REMOVE IF ITS WORKING
+        Speaker.Destroy();*/
+        tts.setPitch(1f);
+        tts.setSpeechRate(1f);
+        tts.speak("Welcome Mister or Misses " + email, TextToSpeech.QUEUE_FLUSH, null);
         ///////////////////////////////////////////
 //
     }
@@ -98,6 +124,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void goBack() {
         finish();
+    }
+
+    //DESTROYING TEXT TO SPEECH
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 
     //TESTING FIREBASE AUTHENTICATION I might remove this later

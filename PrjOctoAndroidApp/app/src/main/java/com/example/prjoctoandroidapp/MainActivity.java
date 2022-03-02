@@ -115,12 +115,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              btnStart.setVisibility(View.GONE);
              btnLogout.setVisibility(View.GONE);
              btnConfigAcc.setVisibility(View.GONE);
+             btnAddPlayer.setVisibility(View.GONE);
              Toast.makeText(this,"No users login yet", Toast.LENGTH_SHORT).show();
          }
          else{
              btnStart.setVisibility(View.VISIBLE);
              btnLogout.setVisibility(View.VISIBLE);
              btnConfigAcc.setVisibility(View.VISIBLE);
+             btnAddPlayer.setVisibility(View.VISIBLE);
              btnLogin.setVisibility(View.GONE);
              btnCreateAcc.setVisibility(View.GONE);
          }

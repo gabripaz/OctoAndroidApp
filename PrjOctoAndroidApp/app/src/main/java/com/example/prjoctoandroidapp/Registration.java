@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +32,7 @@ import model.OctoUser;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
     EditText edUsername,edFullName, edEmail, edPassword, edRepPassword;
+    TextView tvError;
     Button btnCreate,btnReturn;
     ProgressBar progressBar;
 
@@ -50,6 +52,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         edEmail       =  findViewById(R.id.edEmail);
         edPassword    =  findViewById(R.id.edPassword);
         edRepPassword =  findViewById(R.id.edRepPass);
+        tvError       =  findViewById(R.id.tvError);
         btnCreate     =  findViewById(R.id.btnCreateAcc);
         btnReturn     =  findViewById(R.id.btnReturn);
         progressBar   =  findViewById(R.id.progressBar_reg);
@@ -57,10 +60,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         btnCreate.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
 
-        edFullName.addTextChangedListener(new ValidatorTextWatcher(edFullName));
-        edUsername.addTextChangedListener(new ValidatorTextWatcher(edUsername));
-        edPassword.addTextChangedListener(new ValidatorTextWatcher(edPassword));
-        edEmail.addTextChangedListener(new ValidatorTextWatcher(edEmail));
+//        edFullName.addTextChangedListener(new ValidatorTextWatcher(edFullName));
+//        edUsername.addTextChangedListener(new ValidatorTextWatcher(edUsername));
+//        edPassword.addTextChangedListener(new ValidatorTextWatcher(edPassword));
+//        edEmail.addTextChangedListener(new ValidatorTextWatcher(edEmail));
 
         octoDB  = FirebaseDatabase.getInstance().getReference("user");
         mAuth = FirebaseAuth.getInstance();
@@ -79,16 +82,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
     private void createAccount() {
-      if(!validateEmail()){return;}
-      if(!validatePassword()){return;}
-      if(!validateFullname()){return;}
-      if(!validateUsername()){return;}
-        String  fullname, username, email,password;
+      if( !validateUsername() || !validateFullname()  || !validateEmail() || !validatePassword()){return;}
+//
+        String  fullName, username, email,password;
 
-
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         username = edUsername.getText().toString();
-        fullname = edFullName.getText().toString();
+        fullName = edFullName.getText().toString();
         email    = edEmail.getText().toString();
         password = edPassword.getText().toString();
         progressBar.setVisibility(View.VISIBLE);
@@ -98,8 +97,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     //Inserting the rest of the data in the database
-                    OctoUser user = new OctoUser(username,fullname,email);
+                    String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                    OctoUser user = new OctoUser(username,fullName,email);
                     octoDB.child(uid).setValue(user);
+                    mAuth.signOut();
                     sentToMain();
                 }else{
                     Toast.makeText(getApplicationContext(),"Error "+task.getException().toString()+" \n account no created", Toast.LENGTH_LONG).show();
@@ -162,10 +163,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         int usernameLg;
         usernameLg = edUsername.getText().toString().trim().length();
          if(usernameLg==0){
-             Toast.makeText(this,"Username is required",Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this,"Username is required",Toast.LENGTH_SHORT).show();
+             tvError.setText(tvError.getText() + "Username is required\n");
              edUsername.requestFocus();
              return false;
          }else{
+             tvError.setText(null);
              return true;
          }
 
@@ -174,10 +177,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         int fullnameLg;
         fullnameLg = edFullName.getText().toString().trim().length();
         if(fullnameLg==0){
-            Toast.makeText(this,"The name is required",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,"The name is required",Toast.LENGTH_SHORT).show();
+            tvError.setText(tvError.getText() + "Name is required\n");
             edFullName.requestFocus();
             return false;
         }else{
+            tvError.setText(null);
             return true;
         }
 
@@ -193,11 +198,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             matchRegex  = Pattern.matches("^[A-Za-z0-9+_.-]+@(.+)$", email);
 
             if(matchRegex){
-
-                Toast.makeText(this,"Email OK",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Email OK",Toast.LENGTH_SHORT).show();
+                tvError.setText(null);
                 return true;
             }else{
-                Toast.makeText(this,"Invalid Email",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this,"Invalid Email",Toast.LENGTH_SHORT).show();
+                tvError.setText(tvError.getText() + "Invalid Email format\n");
                 edEmail.requestFocus();
                 return false;
             }
@@ -222,23 +228,26 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             Boolean matchRegex;
 
 
-            matchRegex  = Pattern.matches("^[A-Z](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$", password);
+            matchRegex  = Pattern.matches("^[A-Z](?=.*[a-z])(?=.*[0-9]).{6,10}$", password);
 
             if(!matchRegex){
 
-                Toast.makeText(this,"Password does no met the requirements",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Password does no met the requirements",Toast.LENGTH_SHORT).show();
+                tvError.setText(tvError.getText() + "Password does no met the requirements\n");
                 edPassword.requestFocus();
                 return false;
 
             }else if(matchPass!=0){
 
-                Toast.makeText(this,"Password does no match",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this,"Password does no match",Toast.LENGTH_SHORT).show();
+                tvError.setText(tvError.getText() + "Password does no match\n");
                edRepPassword.setText(null);
                return  false;
 
             }
             else{
-                Toast.makeText(this,"Password OK",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this,"Password OK",Toast.LENGTH_SHORT).show();
+                tvError.setText(null);
                 return true;
 
             }
@@ -254,43 +263,43 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private class ValidatorTextWatcher implements TextWatcher {
-        private View view;
-
-        public ValidatorTextWatcher(View view) {
-            this.view = view;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            switch(view.getId()){
-                case(R.id.edPassword):
-                    validatePassword();
-                    break;
-
-                case(R.id.edEmail):
-                    validateEmail();
-                    break;
-                case (R.id.edUsername):
-                    validateUsername();
-                    break;
-                case(R.id.edFullName):
-                    validateFullname();
-                    break;
-            }
-
-        }
-    }
+//    private class ValidatorTextWatcher implements TextWatcher {
+//        private View view;
+//
+//        public ValidatorTextWatcher(View view) {
+//            this.view = view;
+//        }
+//
+//        @Override
+//        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable editable) {
+//            switch(view.getId()){
+//                case(R.id.edPassword):
+//                    validatePassword();
+//                    break;
+//
+//                case(R.id.edEmail):
+//                    validateEmail();
+//                    break;
+//                case (R.id.edUsername):
+//                    validateUsername();
+//                    break;
+//                case(R.id.edFullName):
+//                    validateFullname();
+//                    break;
+//            }
+//
+//        }
+//    }
 
 
 }

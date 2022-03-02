@@ -132,6 +132,18 @@
         app:layout_constraintBaseline_toBaselineOf="@id/tvRepPass"
         app:layout_constraintStart_toStartOf="@id/edPassword" />
 
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edRepPass"
+        android:layout_marginTop="20dp"
+        android:textColor="#D6104E"
+        android:textSize="10sp"
+        android:text="" />
+
     <Button
         android:id="@+id/btnCreateAcc"
         style="@style/buttons"
@@ -139,7 +151,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edRepPass"
+        app:layout_constraintTop_toBottomOf="@id/tvError"
         android:layout_marginTop="50dp"
         android:backgroundTint="#D6104E"
         android:text="Create"

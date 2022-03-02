@@ -60,11 +60,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         btnCreate.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
 
-//        edFullName.addTextChangedListener(new ValidatorTextWatcher(edFullName));
-//        edUsername.addTextChangedListener(new ValidatorTextWatcher(edUsername));
-//        edPassword.addTextChangedListener(new ValidatorTextWatcher(edPassword));
-//        edEmail.addTextChangedListener(new ValidatorTextWatcher(edEmail));
-
         octoDB  = FirebaseDatabase.getInstance().getReference("user");
         mAuth = FirebaseAuth.getInstance();
     }
@@ -262,44 +257,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-//    private class ValidatorTextWatcher implements TextWatcher {
-//        private View view;
-//
-//        public ValidatorTextWatcher(View view) {
-//            this.view = view;
-//        }
-//
-//        @Override
-//        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//        @Override
-//        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable editable) {
-//            switch(view.getId()){
-//                case(R.id.edPassword):
-//                    validatePassword();
-//                    break;
-//
-//                case(R.id.edEmail):
-//                    validateEmail();
-//                    break;
-//                case (R.id.edUsername):
-//                    validateUsername();
-//                    break;
-//                case(R.id.edFullName):
-//                    validateFullname();
-//                    break;
-//            }
-//
-//        }
-//    }
 
 
 }

@@ -27,7 +27,7 @@ import java.util.Locale;
 import model.Speaker;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    EditText edUsernameEmail, edPassword;
+    EditText edUserEmail, edPassword;
     Button btnLogin, btnReturn;
     TextToSpeech tts;
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initialize() {
-        edUsernameEmail = findViewById(R.id.edUsernameEmail);
+        edUserEmail = findViewById(R.id.edUserEmail);
         edPassword      = findViewById(R.id.edPassword);
         btnLogin        = findViewById(R.id.btnLog);
         btnReturn       = findViewById(R.id.btnReturnLg);
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void loginIntoAcc() {
         String email, password;
 
-        email    =  edUsernameEmail.getText().toString();
+        email    =  edUserEmail.getText().toString();
         password =  edPassword.getText().toString();
         //verifying that passwrd and email are not empty
         if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){

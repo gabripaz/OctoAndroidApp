@@ -37,7 +37,7 @@
         android:contentDescription="@string/octologo" />
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvEmail"
         style="@style/SubTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,11 +46,11 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
         android:textSize="20sp"
-        android:labelFor="@id/edUsernameEmail"
-        android:text="Username or Email" />
+        android:labelFor="@id/edUserEmail"
+        android:text="Email" />
 
     <EditText
-        android:id="@+id/edUsernameEmail"
+        android:id="@+id/edUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -62,18 +62,18 @@
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
     <TextView
         android:id="@+id/tvPassword"
         style="@style/SubTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edUsernameEmail"
+        app:layout_constraintTop_toBottomOf="@id/edUserEmail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="5dp"
         android:textSize="20sp"
-        android:labelFor="@id/edUsernameEmail"
+        android:labelFor="@id/edUserEmail"
         android:text="Password"
         />
 

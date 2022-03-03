@@ -65,7 +65,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:textSize="15sp"
-        android:labelFor="@id/edUsernameEmail"
+        android:labelFor="@id/edUserEmail"
         android:text="display email" />
     <TextView
         android:id="@+id/tvTitle"

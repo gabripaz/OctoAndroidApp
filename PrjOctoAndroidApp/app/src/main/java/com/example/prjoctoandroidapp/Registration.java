@@ -23,11 +23,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import java.util.regex.Pattern;
 
 import model.OctoUser;
+import model.Profile;
+import model.Rewards;
 
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
@@ -93,7 +96,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 if(task.isSuccessful()){
                     //Inserting the rest of the data in the database
                     String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                    OctoUser user = new OctoUser(username,fullName,email);
+
+                    //So here I am trying to create an account with a empty profile account just to test     (no working)                               ****
+                    Rewards reward = new Rewards("iron",200);
+                    Profile profile = new Profile("","",1,reward);
+                    ArrayList<Profile> firstProfile= new ArrayList<>();
+                    firstProfile.add(profile);
+                    // end , after we need to see if we can added after
+                    OctoUser user = new OctoUser(username,fullName,email, firstProfile);
                     octoDB.child(uid).setValue(user);
                     mAuth.signOut();
                     sentToMain();
@@ -220,7 +230,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             repPassword = edRepPassword.getText().toString().trim();
             matchPass   = password.compareTo(repPassword);
 
-            Boolean matchRegex;
+            boolean matchRegex;
 
 
             matchRegex  = Pattern.matches("^[A-Z](?=.*[a-z])(?=.*[0-9]).{6,10}$", password);
@@ -228,14 +238,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             if(!matchRegex){
 
                 //Toast.makeText(this,"Password does no met the requirements",Toast.LENGTH_SHORT).show();
-                tvError.setText(tvError.getText() + "Password does no met the requirements\n");
+                tvError.setText(tvError.getText() + "Password does no met the requirements\nFirst letter uppercase\nNeeds a number\nBetween 6 and 10 characters\n");
                 edPassword.requestFocus();
                 return false;
 
             }else if(matchPass!=0){
 
                // Toast.makeText(this,"Password does no match",Toast.LENGTH_SHORT).show();
-                tvError.setText(tvError.getText() + "Password does no match\n");
+               tvError.setText(tvError.getText() + "Password does no match\n");
                edRepPassword.setText(null);
                return  false;
 

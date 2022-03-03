@@ -1,30 +1,34 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class OctoUser implements Serializable {
     private String userId;
     private String username;
-    private  String fullname;
+    private  String fullName;
     private  String email;
     private String password;
+    private ArrayList<Profile> profiles;
 
     public OctoUser() {
     }
 
-    public OctoUser(String username, String fullname, String email) {
+    public OctoUser(String username, String fullName, String email,  ArrayList<Profile>  profile) {
         this.username = username;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.email = email;
+        this.profiles = profile;
 
     }
 
-    public OctoUser(String userId, String username, String fullname, String email, String password) {
+    public OctoUser(String userId, String username, String fullName, String email, String password, ArrayList<Profile> profiles) {
         this.userId = userId;
         this.username = username;
-        this.fullname = fullname;
-        this.email    = email;
+        this.fullName = fullName;
+        this.email = email;
         this.password = password;
+        this.profiles = profiles;
     }
 
     public String getUserId() {
@@ -44,11 +48,11 @@ public class OctoUser implements Serializable {
     }
 
     public String getFullname() {
-        return fullname;
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullname(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPassword() {

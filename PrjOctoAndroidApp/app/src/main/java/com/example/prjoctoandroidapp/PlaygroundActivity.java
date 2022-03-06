@@ -3,6 +3,7 @@ package com.example.prjoctoandroidapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,13 +39,20 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
+        MediaPlayer mp;
         switch (view.getId()){
             case R.id.btnQuestionsAnswers:
+                mp = MediaPlayer.create(this,R.raw.trill_c);
+                mp.start();
                 goToQuestionsAndAnswers();
                 break;
             case R.id.btnImageExplorer:
+                mp = MediaPlayer.create(this,R.raw.trill_f);
+                mp.start();
                 break;
             case R.id.btnReturn:
+                mp = MediaPlayer.create(this,R.raw.return_zip);
+                mp.start();
                 backToMain();
                 break;
         }

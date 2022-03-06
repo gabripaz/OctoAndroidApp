@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
@@ -23,8 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Locale;
-
-import model.Speaker;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     EditText edUserEmail, edPassword;
@@ -76,11 +75,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        MediaPlayer mp;
         switch (view.getId()){
             case R.id.btnReturnLg:
+                mp = MediaPlayer.create(this,R.raw.return_zip);
+                mp.setVolume(60,60);
+                mp.start();
                 goBack();
                 break;
             case R.id.btnLog:
+                mp = MediaPlayer.create(this,R.raw.login_launch);
+                mp.setVolume(60,60);
+                mp.start();
                 loginIntoAcc();
                 break;
         }

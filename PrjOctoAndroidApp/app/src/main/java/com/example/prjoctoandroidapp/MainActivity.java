@@ -3,18 +3,14 @@ package com.example.prjoctoandroidapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //    private TextToSpeech textToSpeech;
@@ -22,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    private Button btnSpeech;
     Button btnCreateAcc, btnLogin, btnStart, btnConfigAcc, btnLogout, btnAddPlayer;
     private FirebaseAuth mAuth;
+    MediaPlayer mediaPlayerMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,28 +42,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnAddPlayer.setOnClickListener(this);
 
             mAuth = FirebaseAuth.getInstance();
-   
+
+            MainAudioStart();
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case (R.id.btnLogin):
+                mediaPlayerMain.stop();
+                MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
+                mediaPlayerLogin.setVolume(60,60);
+                mediaPlayerLogin.start();
                 goLogin();
                 break;
             case(R.id.btnRegister):
+                mediaPlayerMain.stop();
+                MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
+                mediaPlayerRegister.setVolume(60,60);
+                mediaPlayerRegister.start();
                 goCreateAcc();
                 break;
             case(R.id.btnStart):
+                mediaPlayerMain.stop();
                 goStart();
                 break;
             case(R.id.btnAddPlayer):
+                mediaPlayerMain.stop();
                 goToAddPlayer();
             break;
             case(R.id.btnConfigAcc):
+                mediaPlayerMain.stop();
                 goUserAcc();
                 break;
             case(R.id.btnLogout):
+                mediaPlayerMain.stop();
                 logout();
                 break;
         }
@@ -84,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void restartActivity(){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+
     }
     private void goUserAcc() {
         Intent intent = new Intent(this,UserAccountActivity.class);
@@ -110,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      @Override
     protected void onStart() {
          super.onStart();
+         MainAudioStart();
          FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
          if(currUser == null){
              btnStart.setVisibility(View.GONE);
@@ -127,6 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              btnCreateAcc.setVisibility(View.GONE);
          }
      }
+
+    private void MainAudioStart() {
+        mediaPlayerMain = MediaPlayer.create(this, R.raw.main_ocean);
+        mediaPlayerMain.setLooping(true);
+        mediaPlayerMain.start();
+    }
 
 
 //      GABRIEL Text to speech code test

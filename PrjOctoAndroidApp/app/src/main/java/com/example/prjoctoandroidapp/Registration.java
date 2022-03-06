@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -69,11 +70,18 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        MediaPlayer mp;
         switch (view.getId()){
             case R.id.btnReturn:
+                mp = MediaPlayer.create(this,R.raw.return_zip);
+                mp.setVolume(60,60);
+                mp.start();
                 goBack();
                 break;
             case R.id.btnCreateAcc:
+                mp = MediaPlayer.create(this,R.raw.register_launch);
+                mp.setVolume(60,60);
+                mp.start();
                 createAccount();
                 break;
         }

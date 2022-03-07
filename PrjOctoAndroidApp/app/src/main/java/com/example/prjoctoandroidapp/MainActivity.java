@@ -51,17 +51,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case (R.id.btnLogin):
-                mediaPlayerMain.stop();
+                /*mediaPlayerMain.stop();
                 MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
                 mediaPlayerLogin.setVolume(60,60);
-                mediaPlayerLogin.start();
+                mediaPlayerLogin.start();*/
                 goLogin();
                 break;
             case(R.id.btnRegister):
-                mediaPlayerMain.stop();
+                /*mediaPlayerMain.stop();
                 MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
                 mediaPlayerRegister.setVolume(60,60);
-                mediaPlayerRegister.start();
+                mediaPlayerRegister.start();*/
                 goCreateAcc();
                 break;
             case(R.id.btnStart):
@@ -146,49 +146,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mediaPlayerMain.setLooping(true);
         mediaPlayerMain.start();
     }
-
-
-//      GABRIEL Text to speech code test
-//    private void intialize() {
-//        btnSpeech = findViewById(R.id.btnSpeak);
-//        edText = findViewById(R.id.edTextToSay);
-//        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-//            @Override
-//            public void onInit(int i) {
-//                if(i == TextToSpeech.SUCCESS){ //validates the initialization
-//                    int res = textToSpeech.setLanguage(Locale.ENGLISH);
-//                    switch (res){
-//                        case TextToSpeech.LANG_MISSING_DATA:
-//                        case TextToSpeech.LANG_NOT_SUPPORTED:
-//                            Log.e("Text to Speech", "Language not supported");
-//                            break;
-//                        default:
-//                            btnSpeech.setEnabled(true);
-//                    }
-//                }else{
-//                    Log.e("Text to Speech", "Initialization Failed");
-//                }
-//            }
-//        });
-//        btnSpeech.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                speak();
-//            }
-//        });
-//    }
-//
-//    private void speak() {
-//        String message = edText.getText().toString();
-//        textToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null);
-//    }
-//    //just for security
-//    @Override
-//    protected void onDestroy() {
-//        if (textToSpeech != null) {
-//            textToSpeech.stop();
-//            textToSpeech.shutdown();
-//        }
-//        super.onDestroy();
-//    }
 }

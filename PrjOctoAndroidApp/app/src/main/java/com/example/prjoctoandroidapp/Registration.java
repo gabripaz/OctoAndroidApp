@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,7 +112,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     OctoUser user = new OctoUser(username,fullName,email, firstProfile);
                     octoDB.child(uid).setValue(user);
                     mAuth.signOut();
-                    sentToMain();
+                    sendToMain();
                 }else{
                     Toast.makeText(getApplicationContext(),"Error "+task.getException().toString()+" \n account no created", Toast.LENGTH_LONG).show();
                 }
@@ -140,7 +138,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void sentToMain() {
+    private void sendToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

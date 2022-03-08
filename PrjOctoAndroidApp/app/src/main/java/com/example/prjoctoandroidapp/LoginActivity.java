@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         email    =  edUserEmail.getText().toString();
         password =  edPassword.getText().toString();
-        //verifying that passwrd and email are not empty
+        //verifying that password and email are not empty
         if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
             progressBar.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -113,11 +113,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         }
         //TO BE REMOVED!!!!!!!!////////////////////
-        /*Speaker.SpeakThis(this,email);   //TESTING REMOVE IF ITS WORKING
-        Speaker.Destroy();*/
-        tts.setPitch(1f);
+        /*tts.setPitch(1f);
         tts.setSpeechRate(1f);
-        tts.speak("Welcome Mister or Misses " + email, TextToSpeech.QUEUE_FLUSH, null);
+        tts.speak("Welcome Mister or Misses " + email, TextToSpeech.QUEUE_FLUSH, null);*/
         ///////////////////////////////////////////
 //
     }

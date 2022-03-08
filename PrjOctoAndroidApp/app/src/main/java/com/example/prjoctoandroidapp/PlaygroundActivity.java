@@ -10,11 +10,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+
 public class PlaygroundActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //Controls
     Button btnQuetAndAnsw, btnImgExplorer, btnReturn;
     TextView tvKidsName, tvKidsLevel,tvKidsPoints;
     ImageView kidsAvatar;
+
+    //Variables
+    int profileID;
+
+    //Objects
+    private FirebaseAuth mAuth;
+    DatabaseReference octoDB,currentProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +48,11 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         btnQuetAndAnsw.setOnClickListener(this);
         btnImgExplorer.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
+
+        octoDB  = FirebaseDatabase.getInstance().getReference("user");
+        mAuth = FirebaseAuth.getInstance();
+        //We need to get the profile ID to go further.
+        //currentProfile = octoDB.child(mAuth.getUid()).child("profile").child(profileID);
 
     }
 

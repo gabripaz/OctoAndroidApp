@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void goStart() {
         Intent intent = new Intent(this,PlaygroundActivity.class);
+        //We need to put in the intent the id from the profile to manage easily later
+        //intent.putExtra("id":id)
         startActivity(intent);
     }
 

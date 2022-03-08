@@ -1,12 +1,12 @@
 package model;
 
-public class Rewards {
+public class Reward {
     private String badgeName;
     private int points;
 
-    public Rewards() {
+    public Reward() {
     }
-    public Rewards(String badgeName, int points) {
+    public Reward(String badgeName, int points) {
         this.badgeName = badgeName;
         this.points = points;
     }

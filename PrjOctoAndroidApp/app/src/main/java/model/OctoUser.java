@@ -10,7 +10,6 @@ public class OctoUser implements Serializable {
     private  String email;
     private String password;
     private ArrayList<Profile> profiles;
-
     public OctoUser() {
     }
 
@@ -70,4 +69,9 @@ public class OctoUser implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public ArrayList<Profile> getProfiles() {return profiles;}
+
+    public void setProfiles(ArrayList<Profile> profiles) {this.profiles = profiles;}
+
 }

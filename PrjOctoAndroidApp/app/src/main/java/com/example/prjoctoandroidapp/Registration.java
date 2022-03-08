@@ -23,13 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import java.util.regex.Pattern;
 
 import model.OctoUser;
 import model.Profile;
-import model.Rewards;
+import model.Reward;
 
 
 public class Registration extends AppCompatActivity implements View.OnClickListener {
@@ -104,12 +105,11 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
                     //So here I am trying to create an account with a empty profile account just to test     (no working)                               ****
-                    Rewards reward = new Rewards("iron",200);
-                    Profile profile = new Profile("","",1,reward);
-                    ArrayList<Profile> firstProfile= new ArrayList<>();
-                    firstProfile.add(profile);
+                    Reward reward = new Reward("welcome",0);
+                    Profile profile = new Profile("","",0,new ArrayList<Reward>(Arrays.asList(reward)));
+
                     // end , after we need to see if we can added after
-                    OctoUser user = new OctoUser(username,fullName,email, firstProfile);
+                    OctoUser user = new OctoUser(username,fullName,email, new ArrayList<Profile>(Arrays.asList(profile)));
                     octoDB.child(uid).setValue(user);
                     mAuth.signOut();
                     sendToMain();

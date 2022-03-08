@@ -1,16 +1,18 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Profile {
     private String nickName;
     private String avatarUrl;
     private int age;
     private int points;
-    private Rewards rewards;
+    private ArrayList<Reward> rewards;
 
     public Profile() {
     }
 
-    public Profile(String nickName, String avatarUrl, int age, Rewards rewards) {
+    public Profile(String nickName, String avatarUrl, int age, ArrayList<Reward> rewards) {
         this.nickName = nickName;
         this.avatarUrl = avatarUrl;
         this.age = age;
@@ -18,7 +20,7 @@ public class Profile {
         this.rewards = rewards;
     }
 
-    public Profile(String nickName, String avatarUrl, int age, int points, Rewards rewards) {
+    public Profile(String nickName, String avatarUrl, int age, int points, ArrayList<Reward> rewards) {
         this.nickName = nickName;
         this.avatarUrl = avatarUrl;
         this.age = age;
@@ -42,7 +44,7 @@ public class Profile {
 
     public void setPoints(int points) {this.points = points;  }
 
-    public Rewards getRewards() { return rewards;}
+    public ArrayList<Reward> getRewards() { return rewards;}
 
-    public void setRewards(Rewards rewards) {this.rewards = rewards;}
+    public void setRewards(ArrayList<Reward> rewards) {this.rewards = rewards;}
 }

@@ -68,6 +68,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
             case R.id.btnImageExplorer:
                 mp = MediaPlayer.create(this,R.raw.trill_f);
                 mp.start();
+                goToImageExplorer();
                 break;
             case R.id.btnReturn:
                 mp = MediaPlayer.create(this,R.raw.return_zip);
@@ -75,6 +76,11 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
                 backToMain();
                 break;
         }
+    }
+
+    private void goToImageExplorer() {
+        Intent intent = new Intent(this, MLTestActivity.class);
+        startActivity(intent);
     }
 
     private void goToQuestionsAndAnswers() {

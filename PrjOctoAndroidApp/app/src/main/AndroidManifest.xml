@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prjoctoandroidapp">
+    <!-- below line is use to add camera feature in our app -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" /> <!-- permission for internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +14,9 @@
         android:roundIcon="@mipmap/octo_logo_v2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PrjOctoAndroidApp">
+        <activity
+            android:name=".MLTestActivity"
+            android:exported="false" />
         <activity
             android:name=".AddPlayerActivity"
             android:exported="false" />
@@ -39,9 +47,7 @@
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts"
-
-            />
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

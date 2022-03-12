@@ -15,6 +15,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.util.ArrayList;
+
+import model.Question;
+import model.RunOfQuestions;
+
 public class PlaygroundActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Controls
@@ -85,6 +90,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
+        intent.putExtra("newRun", new ArrayList<Question>());
         startActivity(intent);
     }
 

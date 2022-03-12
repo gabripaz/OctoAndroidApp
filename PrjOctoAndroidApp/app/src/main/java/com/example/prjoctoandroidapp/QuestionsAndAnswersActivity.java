@@ -9,6 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import model.Question;
+
 public class QuestionsAndAnswersActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, getImgBtnAnswerFour;
@@ -43,6 +47,10 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
         btnExit.setOnClickListener(this);
         btnSkip.setOnClickListener(this);
+
+        ArrayList<Question> listOfQuestions = (ArrayList<Question>) getIntent().getSerializableExtra("newRun");
+
+
 
     }
 

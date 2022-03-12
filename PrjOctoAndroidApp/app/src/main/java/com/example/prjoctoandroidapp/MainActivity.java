@@ -52,16 +52,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case (R.id.btnLogin):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
+                /*MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
                 mediaPlayerLogin.setVolume(60,60);
-                mediaPlayerLogin.start();
+                mediaPlayerLogin.start();*/
                 goLogin();
                 break;
             case(R.id.btnRegister):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
+                /*MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
                 mediaPlayerRegister.setVolume(60,60);
-                mediaPlayerRegister.start();
+                mediaPlayerRegister.start();*/
                 goCreateAcc();
                 break;
             case(R.id.btnStart):

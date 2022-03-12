@@ -63,7 +63,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         btnCreate.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
 
-        octoDB  = FirebaseDatabase.getInstance().getReference("user");
+        octoDB  = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -144,32 +144,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-
-
-//GABRIEL TEST CODE
-//    private void comparePassword(View view) {
-//        try {
-//            String password, repPassword;
-//            int matchPass;
-//            password    = edPassword.getText().toString();
-//            repPassword = edRepPassword.getText().toString();
-//            matchPass   = password.compareTo(repPassword);
-//            if(matchPass==0){
-//
-//                Toast.makeText(this,"Password OK",Toast.LENGTH_LONG).show();
-//            }else{
-//
-//                Snackbar.make(view, "Password is not the same, try again", Snackbar.LENGTH_LONG).show();
-//                edRepPassword.setText(null);
-//                edRepPassword.requestFocus();
-//            }
-//
-//        }catch (Exception e){
-//
-//            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
-//
-//        }
-//    }
     private boolean validateUsername(){
         int usernameLg;
         usernameLg = edUsername.getText().toString().trim().length();

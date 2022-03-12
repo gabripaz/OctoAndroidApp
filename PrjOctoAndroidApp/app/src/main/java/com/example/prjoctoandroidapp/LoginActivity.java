@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnReturn.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
 
-        octoDB  = FirebaseDatabase.getInstance().getReference("user");
+        octoDB  = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.login_progressBar);
 

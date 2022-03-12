@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.ml.vision.FirebaseVision;
+
+//API I HAD TO COMMENT
+/*import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
-import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
+import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +68,7 @@ public class MLTestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // calling method
                 // to label images.
-                labelImage();
+                //labelImage();
             }
         });
         // adding on click listener for our snap button.
@@ -105,8 +107,9 @@ public class MLTestActivity extends AppCompatActivity {
         }
     }
 
-    private void labelImage() {
-
+    private void labelImage() throws Exception {
+        throw new Exception("Not implemented");
+        /*
         // inside the label image method we are calling a
         // firebase vision image and passing our image bitmap to it.
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
@@ -148,5 +151,6 @@ public class MLTestActivity extends AppCompatActivity {
                 Toast.makeText(MLTestActivity.this, "Fail to get data..", Toast.LENGTH_SHORT).show();
             }
         });
+        */
     }
 }

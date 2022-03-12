@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="25sp"
         android:labelFor="@id/edNickname"
         android:text="Nickname :" />
@@ -95,12 +95,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/round_edit_text"
-        android:ems="10"
+        android:ems="8"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text=""
         app:layout_constraintStart_toEndOf="@id/tvNicknameLb"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="8dp"
         android:textAlignment="center"
         app:layout_constraintBaseline_toBaselineOf="@id/tvNicknameLb"
         app:layout_constraintTop_toBottomOf="@id/tvNicknameLb"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/edNickname"
         app:layout_constraintStart_toStartOf="@id/tvNicknameLb"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:textSize="25sp"
         android:labelFor="@id/edAge"
         android:text="Age :" />
@@ -124,7 +124,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/tvAgeLb"
         app:layout_constraintStart_toStartOf="@id/edNickname"
         android:background="@drawable/round_edit_text"
-        android:ems="10"
+        android:ems="8"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textAlignment="center"
@@ -149,9 +149,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/imgAvatarTwo"
         app:layout_constraintTop_toBottomOf="@id/tvAavtarLb"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginTop="2dp"
         app:srcCompat="@drawable/avatar_one" />
 
     <ImageButton
@@ -160,25 +160,42 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvAavtarLb"
         app:layout_constraintLeft_toRightOf="@id/imgAvatarOne"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="20dp"
+        app:layout_constraintRight_toLeftOf="@id/imgAvatarThree"
         app:srcCompat="@drawable/avatar_two" />
 
     <ImageButton
         android:id="@+id/imgAvatarThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/imgAvatarOne"
-        app:layout_constraintTop_toBottomOf="@id/imgAvatarOne"
+        app:layout_constraintLeft_toRightOf="@id/imgAvatarTwo"
+        app:layout_constraintTop_toBottomOf="@id/tvAavtarLb"
+        app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/avatar_three" />
 
     <ImageButton
         android:id="@+id/imgAvatarFour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/imgAvatarTwo"
+        app:layout_constraintStart_toStartOf="@id/imgAvatarOne"
         app:layout_constraintTop_toBottomOf="@id/imgAvatarOne"
+        app:layout_constraintRight_toLeftOf="@id/imgAvatarFive"
         app:srcCompat="@drawable/avatar_four" />
+    <ImageButton
+        android:id="@+id/imgAvatarFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarTwo"
+        app:layout_constraintLeft_toRightOf="@id/imgAvatarFour"
+        app:layout_constraintRight_toLeftOf="@id/imgAvatarSix"
+        app:srcCompat="@drawable/avatar_five" />
+    <ImageButton
+        android:id="@+id/imgAvatarSix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarThree"
+        app:layout_constraintLeft_toRightOf="@id/imgAvatarFive"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/avatar_six" />
 
 
 
@@ -189,8 +206,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgAvatarThree"
-        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarFour"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#D6104E"
         android:text="Add Player"
         android:background="@drawable/button_selector"

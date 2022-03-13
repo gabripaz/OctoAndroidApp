@@ -54,7 +54,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         btnImgExplorer.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
 
-        octoDB  = FirebaseDatabase.getInstance().getReference("user");
+        octoDB  = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
         //We need to get the profile ID to go further.
         //currentProfile = octoDB.child(mAuth.getUid()).child("profile").child(profileID);
@@ -90,7 +90,21 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
-        intent.putExtra("newRun", new ArrayList<Question>());
+
+        //Test
+        //String answer, String statement, String images, String musics, String sounds, int id, int minage, int points, ArrayList<String> options
+        ArrayList<Question> arQuestions= new ArrayList<Question>();
+        ArrayList<String> arString = new ArrayList<String>();
+        arString.add("a");
+        arString.add("b");
+        arString.add("c");
+        arString.add("d");
+        arQuestions.add(new Question("2","How much is 1+1?",null,null,null,2,5,500, arString));
+        intent.putExtra("newRun", arQuestions);
+
+        //Oficial line
+        //intent.putExtra("newRun", new ArrayList<Question>());
+
         startActivity(intent);
     }
 

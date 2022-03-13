@@ -1,13 +1,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Question implements Serializable {
     private String answer, statement;
     private String images,musics,sounds;
     private int id,minage,points;
+    private ArrayList<String> options;
 
-    public Question(String answer, String statement, String images, String musics, String sounds, int id, int minage, int points) {
+    public Question(String answer, String statement, String images, String musics, String sounds, int id, int minage, int points, ArrayList<String> options) {
         this.answer = answer;
         this.statement = statement;
         this.images = images;
@@ -16,6 +18,7 @@ public class Question implements Serializable {
         this.id = id;
         this.minage = minage;
         this.points = points;
+        this.options = options;
     }
 
     public String getAnswer() {return answer;}
@@ -49,4 +52,8 @@ public class Question implements Serializable {
     public int getPoints() {return points;}
 
     public void setPoints(int points) {this.points = points;}
+
+    public ArrayList<String> getOptions() {return options;}
+
+    public void setOptions(ArrayList<String> options) {this.options = options;}
 }

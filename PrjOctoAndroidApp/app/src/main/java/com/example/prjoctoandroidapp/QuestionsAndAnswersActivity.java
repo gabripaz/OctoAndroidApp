@@ -23,12 +23,15 @@ import model.Question;
 
 public class QuestionsAndAnswersActivity extends AppCompatActivity implements View.OnClickListener {
 
+    final int MAX_NB_QUESTIONS = 5;
+    int attempt;
+
     //Controls
     ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, getImgBtnAnswerFour;
     Button btnExit, btnSkip;
     TextView tvKidsName, tvQuestion, tvQuestionNumber;
-    ArrayList<Long> opt;
-    int attempt;
+
+
     //Objects
     private FirebaseAuth mAuth;
     DatabaseReference octoDB;
@@ -68,7 +71,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
         mAuth = FirebaseAuth.getInstance();
-        DatabaseReference user = octoDB.child(mAuth.getUid()).child("username");
+        DatabaseReference user = octoDB.child(mAuth.getUid()).child("username"); //Later we need to get the profile name.
         user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -81,30 +84,24 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
             }
         });
-        getQuestions();
+        int curQNb = listOfQuestions.size();
+        tvQuestionNumber.setText("Question"+ curQNb +" of " + MAX_NB_QUESTIONS);
+        getQuestion("1");
 
     }
 
-    private void getQuestions() {
+    private void getQuestion(String questionID) {
 
-        octoDB  = FirebaseDatabase.getInstance().getReference("questions");
-        DatabaseReference ques = octoDB.child("1");
+        DatabaseReference ques = FirebaseDatabase.getInstance().getReference("questions").child(questionID);
         ques.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                question = new Question();
 
                 for(DataSnapshot snap : snapshot.getChildren()){
-                    question = new Question();
-                    if(snap.getKey().compareTo("answer") == 0){
-                        long ans = snap.getValue(Long.class);
-                        question.setAnswer(String.valueOf(ans));
 
-                    }
-                    if(snap.getKey().compareTo("id") == 0){
-                        long id = snap.getValue(Long.class);
-                        System.out.print("id"+id);
-                        question.setId(id);
-                        tvQuestionNumber.setText(String.valueOf(question.getId()));
+                    if(snap.getKey().compareTo("answer") == 0){
+                        question.setAnswer(snap.getValue(String.class));
                     }
                     if(snap.getKey().compareTo("minage") == 0){
                         long age = snap.getValue(Long.class);
@@ -130,11 +127,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                     }
 
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -154,20 +149,23 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         boolean result=false;
         switch(view.getId()){
             case R.id.imgBtnAnswerOne:
-                result= checkAns(2,attempt);
-                break;
+               result= checkAns(2,attempt);
+               break;
             case R.id.imgBtnAnswerTwo:
-                result= checkAns(3,attempt);
-                break;
+               result= checkAns(3,attempt);
+               break;
             case R.id.imgBtnAnswerThree:
-                 result= checkAns(100,attempt);
-                break;
+               result= checkAns(100,attempt);
+               break;
             case R.id.imgBtnAnswerFour:
                result= checkAns(51,attempt);
-                break;
+               break;
+            case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION
+               finish();
+               break;
             default:
-                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
-                break;
+               Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
+               break;
         }
         Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
         if(result == true){

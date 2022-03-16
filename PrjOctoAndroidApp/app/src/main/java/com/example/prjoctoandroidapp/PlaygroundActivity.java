@@ -92,7 +92,6 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
 
         //Test
-        //String answer, String statement, String images, String musics, String sounds, int id, int minage, int points, ArrayList<String> options
         ArrayList<Question> arQuestions= new ArrayList<Question>();
         ArrayList<String> arString = new ArrayList<String>();
         arString.add("a");

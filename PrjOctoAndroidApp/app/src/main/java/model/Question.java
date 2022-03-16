@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class Question implements Serializable {
     private String answer, statement;
     private String images,musics,sounds;
-    private int id,minage,points;
+    private long id;
+    private long minage;
+    private long points;
     private ArrayList<String> options;
 
-    public Question(String answer, String statement, String images, String musics, String sounds, int id, int minage, int points, ArrayList<String> options) {
+    public Question(String answer, String statement, String images, String musics, String sounds, long id, long minage, long points, ArrayList<String> options) {
         this.answer = answer;
         this.statement = statement;
         this.images = images;
@@ -20,6 +22,7 @@ public class Question implements Serializable {
         this.points = points;
         this.options = options;
     }
+    public Question(){}
 
     public String getAnswer() {return answer;}
 
@@ -41,17 +44,17 @@ public class Question implements Serializable {
 
     public void setSounds(String sounds) {this.sounds = sounds;}
 
-    public int getId() {return id;}
+    public long getId() {return id;}
 
-    public void setId(int id) {this.id = id;}
+    public void setId(long id) {this.id = id;}
 
-    public int getMinage() {return minage;}
+    public long getMinage() {return minage;}
 
-    public void setMinage(int minage) {this.minage = minage;}
+    public void setMinage(long minage) {this.minage = minage;}
 
-    public int getPoints() {return points;}
+    public long getPoints() {return points;}
 
-    public void setPoints(int points) {this.points = points;}
+    public void setPoints(long points) {this.points = points;}
 
     public ArrayList<String> getOptions() {return options;}
 

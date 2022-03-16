@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +27,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, getImgBtnAnswerFour;
     Button btnExit, btnSkip;
     TextView tvKidsName, tvQuestion, tvQuestionNumber;
-
+    ArrayList<Long> opt;
+    int attempt;
     //Objects
     private FirebaseAuth mAuth;
     DatabaseReference octoDB;
+    Question question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
         btnExit.setOnClickListener(this);
         btnSkip.setOnClickListener(this);
-
+        attempt=0;
         ArrayList<Question> listOfQuestions = (ArrayList<Question>) getIntent().getSerializableExtra("newRun");
 
         //MORE TESTING
@@ -79,8 +81,62 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
             }
         });
-        //tvKidsName.setText(octoDB.child(mAuth.getUid()).child("username").get.toString());
-        //END OF TESTING
+        getQuestions();
+
+    }
+
+    private void getQuestions() {
+
+        octoDB  = FirebaseDatabase.getInstance().getReference("questions");
+        DatabaseReference ques = octoDB.child("1");
+        ques.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    question = new Question();
+                    if(snap.getKey().compareTo("answer") == 0){
+                        long ans = snap.getValue(Long.class);
+                        question.setAnswer(String.valueOf(ans));
+
+                    }
+                    if(snap.getKey().compareTo("id") == 0){
+                        long id = snap.getValue(Long.class);
+                        System.out.print("id"+id);
+                        question.setId(id);
+                        tvQuestionNumber.setText(String.valueOf(question.getId()));
+                    }
+                    if(snap.getKey().compareTo("minage") == 0){
+                        long age = snap.getValue(Long.class);
+                        question.setMinage(age);
+                    }
+                    if(snap.getKey().compareTo("options") == 0){
+                        ArrayList<String> opt = new ArrayList<>();
+                        for (DataSnapshot s : snap.getChildren()){
+                            long option = s.getValue(Long.class);
+                            opt.add(String.valueOf(option));
+                        }
+                        question.setOptions(opt);
+                    }
+
+                    if(snap.getKey().compareTo("points") == 0){
+                        long point = snap.getValue(Long.class);
+                        question.setPoints(point);
+                    }
+
+                     if(snap.getKey().compareTo("statement") == 0){
+                        question.setStatement(snap.getValue(String.class));
+                        tvQuestion.setText(question.getStatement());
+                    }
+
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     //Next steps:
@@ -94,6 +150,45 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View view) {
+        attempt++;
+        boolean result=false;
+        switch(view.getId()){
+            case R.id.imgBtnAnswerOne:
+                result= checkAns(2,attempt);
+                break;
+            case R.id.imgBtnAnswerTwo:
+                result= checkAns(3,attempt);
+                break;
+            case R.id.imgBtnAnswerThree:
+                 result= checkAns(100,attempt);
+                break;
+            case R.id.imgBtnAnswerFour:
+               result= checkAns(51,attempt);
+                break;
+            default:
+                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
+        if(result == true){
+            Toast.makeText(this, "Congratulations...", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Sorry You have Excedd attemps", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    private boolean checkAns(int i, int attempt) {
+        boolean result= false;
+        if(attempt >2){
+            result=false;
+        }else{
+            if(question.getAnswer().compareTo(String.valueOf(i))==0){
+                result=true;
+                //Toast.makeText(this, "Ans checked", Toast.LENGTH_SHORT).show();
+            }else{
+                result=false;
+            }
+        }
+        return result;
     }
 }

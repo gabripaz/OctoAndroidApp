@@ -83,7 +83,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="15dp"
         android:contentDescription="Answer one picture"
-        app:srcCompat="@android:drawable/btn_star_big_on"
+        app:srcCompat="@drawable/two"
        />
     <ImageButton
         android:id="@+id/imgBtnAnswerTwo"
@@ -94,7 +94,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:contentDescription="Answer two picture"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/three" />
     <ImageButton
         android:id="@+id/imgBtnAnswerThree"
         android:layout_width="140dp"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toStartOf="@id/imgBtnAnswerOne"
         android:layout_marginTop="25dp"
         android:contentDescription="Answer three picture"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/hundred" />
     <ImageButton
         android:id="@+id/imgBtnAnswerFour"
         android:layout_width="140dp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@id/imgBtnAnswerTwo"
         android:layout_marginTop="25dp"
         android:contentDescription="Answer four picture"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/fiftyone" />
 
     <Button
         android:id="@+id/btnSkip"

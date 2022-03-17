@@ -30,7 +30,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     int attempt;
 
     //Controls
-    ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, getImgBtnAnswerFour;
+    ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, imgBtnAnswerFour;
     Button btnExit, btnSkip;
     TextView tvKidsName, tvQuestion, tvQuestionNumber;
 
@@ -39,6 +39,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     private FirebaseAuth mAuth;
     DatabaseReference octoDB;
     Question question;
+    ArrayList<String> imagesURLs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,11 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     }
 
     private void initialize() {
+        //Controls
         imgBtnAnswerOne     =  findViewById(R.id.imgBtnAnswerOne);
         imgBtnAnswerTwo     =  findViewById(R.id.imgBtnAnswerTwo);
         imgBtnAnswerThree   =  findViewById(R.id.imgBtnAnswerThree);
-        getImgBtnAnswerFour =  findViewById(R.id.imgBtnAnswerFour);
+        imgBtnAnswerFour =  findViewById(R.id.imgBtnAnswerFour);
 
         btnExit             =  findViewById(R.id.btnExit);
         btnSkip             =  findViewById(R.id.btnSkip);
@@ -63,14 +65,15 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         imgBtnAnswerOne.setOnClickListener(this);
         imgBtnAnswerTwo.setOnClickListener(this);
         imgBtnAnswerThree.setOnClickListener(this);
-        getImgBtnAnswerFour.setOnClickListener(this);
+        imgBtnAnswerFour.setOnClickListener(this);
 
         btnExit.setOnClickListener(this);
         btnSkip.setOnClickListener(this);
+
+        //Variables and objects
         attempt=0;
         ArrayList<Question> listOfQuestions = (ArrayList<Question>) getIntent().getSerializableExtra("newRun");
 
-        //MORE TESTING
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
         mAuth = FirebaseAuth.getInstance();
@@ -90,7 +93,6 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         int curQNb = listOfQuestions.size();
         tvQuestionNumber.setText("Question"+ curQNb +" of " + MAX_NB_QUESTIONS);
         getQuestion("1");
-
     }
 
     private void getQuestion(String questionID) {
@@ -100,36 +102,18 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 question = new Question();
+                imagesURLs = new ArrayList<>();
+                imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
+                question.setAnswer((String)snapshot.child("answer").getValue());
+                question.setMinage((Long)snapshot.child("minage").getValue());
+                question.setOptions((ArrayList)snapshot.child("options").getValue());
+                question.setPoints((Long)snapshot.child("points").getValue());
+                question.setStatement((String)snapshot.child("statement").getValue());
+                tvQuestion.setText(question.getStatement());
+                //Picasso.with(this).load(photoURl).placeholder().into();
+                //his video
+                //https://www.youtube.com/watch?v=UDZpfYf-E7A&t=158s
 
-                for(DataSnapshot snap : snapshot.getChildren()){
-
-                    if(snap.getKey().compareTo("answer") == 0){
-                        question.setAnswer(snap.getValue(String.class));
-                    }
-                    if(snap.getKey().compareTo("minage") == 0){
-                        long age = snap.getValue(Long.class);
-                        question.setMinage(age);
-                    }
-                    if(snap.getKey().compareTo("options") == 0){
-                        ArrayList<String> opt = new ArrayList<>();
-                        for (DataSnapshot s : snap.getChildren()){
-                            long option = s.getValue(Long.class);
-                            opt.add(String.valueOf(option));
-                        }
-                        question.setOptions(opt);
-                    }
-
-                    if(snap.getKey().compareTo("points") == 0){
-                        long point = snap.getValue(Long.class);
-                        question.setPoints(point);
-                    }
-
-                     if(snap.getKey().compareTo("statement") == 0){
-                        question.setStatement(snap.getValue(String.class));
-                        tvQuestion.setText(question.getStatement());
-                    }
-
-                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -170,12 +154,11 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
                break;
         }
+
         Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
         if(result == true){
-           // Toast.makeText(this, "Congratulations...", Toast.LENGTH_SHORT).show();
-            showAlertDialog(R.layout.dialog_postive_layout);
+           showAlertDialog(R.layout.dialog_postive_layout);
         }else{
-            //Toast.makeText(this, "Sorry You have Excedd attemps", Toast.LENGTH_SHORT).show();
             showAlertDialog(R.layout.dialog_negative_layout);
         }
     }

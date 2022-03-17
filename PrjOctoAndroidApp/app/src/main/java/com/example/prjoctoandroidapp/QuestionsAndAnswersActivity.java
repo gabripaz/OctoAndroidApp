@@ -1,8 +1,11 @@
 package com.example.prjoctoandroidapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -169,12 +172,33 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
         Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
         if(result == true){
-            Toast.makeText(this, "Congratulations...", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Congratulations...", Toast.LENGTH_SHORT).show();
+            showAlertDialog(R.layout.dialog_postive_layout);
         }else{
-            Toast.makeText(this, "Sorry You have Excedd attemps", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Sorry You have Excedd attemps", Toast.LENGTH_SHORT).show();
+            showAlertDialog(R.layout.dialog_negative_layout);
         }
     }
 
+    private void showAlertDialog(int layout){
+        //AlertDialog dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder
+                = new AlertDialog
+                .Builder(this);
+        View layoutView = getLayoutInflater().inflate(layout, null);
+        Button dialogButton = layoutView.findViewById(R.id.btnDialog);
+        dialogBuilder.setView(layoutView);
+        //alertDialog = dialogBuilder.create();
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+    }
     private boolean checkAns(int i, int attempt) {
         boolean result= false;
         if(attempt >2){

@@ -11,5 +11,7 @@
     <color name="grey_font">#ff9e9e9e</color>
     <color name="text_shadow">#7F000000</color>
     <color name="text_shadow_white">#FFFFFF</color>
+    <color name="colorGreen">#4CAF50</color>
+    <color name="colorRed">#E91E63</color>
 
 </resources>

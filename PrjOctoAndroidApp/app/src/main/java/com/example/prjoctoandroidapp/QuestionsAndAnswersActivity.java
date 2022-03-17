@@ -200,17 +200,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         });
     }
     private boolean checkAns(int i, int attempt) {
-        boolean result= false;
-        if(attempt >2){
-            result=false;
-        }else{
-            if(question.getAnswer().compareTo(String.valueOf(i))==0){
-                result=true;
-                //Toast.makeText(this, "Ans checked", Toast.LENGTH_SHORT).show();
-            }else{
-                result=false;
-            }
+        if(attempt <= 2 && question.getAnswer().compareTo(String.valueOf(i))==0){
+            return true;
         }
-        return result;
+        return false;
     }
 }

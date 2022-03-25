@@ -19,8 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import model.Question;
 
@@ -31,6 +34,8 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
     //Controls
     ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, imgBtnAnswerFour;
+    ArrayList<ImageButton> groupOfImageButtons = new ArrayList<>(
+            Arrays.asList(imgBtnAnswerOne,imgBtnAnswerTwo,imgBtnAnswerThree,imgBtnAnswerFour));
     Button btnExit, btnSkip;
     TextView tvKidsName, tvQuestion, tvQuestionNumber;
 
@@ -110,7 +115,16 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                 question.setPoints((Long)snapshot.child("points").getValue());
                 question.setStatement((String)snapshot.child("statement").getValue());
                 tvQuestion.setText(question.getStatement());
-                //Picasso.with(this).load(photoURl).placeholder().into();
+
+                Picasso.get().load(imagesURLs.get(1)).into(imgBtnAnswerOne);
+                Picasso.get().load(imagesURLs.get(2)).into(imgBtnAnswerTwo);
+                Picasso.get().load(imagesURLs.get(3)).into(imgBtnAnswerThree);
+                Picasso.get().load(imagesURLs.get(4)).into(imgBtnAnswerFour);
+
+                /*for (int i = 0; i < groupOfImageButtons.size(); i++) {
+                    Picasso.get().load(imagesURLs.get(i)).into(groupOfImageButtons.get(i));
+                }*/
+
                 //his video
                 //https://www.youtube.com/watch?v=UDZpfYf-E7A&t=158s
 
@@ -120,15 +134,6 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             }
         });
     }
-
-    //Next steps:
-    /*
-    * 1 - Pass user age in the intent.
-    * 2 - Get another question (based on age).
-    * 3 - Fill the options.
-    * 4 - Check the answer.
-    * 5 - Go to the next Activity (next question, skipped question or result).
-    * */
 
     @Override
     public void onClick(View view) {

@@ -42,10 +42,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
 
     //Objects
-    private FirebaseAuth mAuth;
-    DatabaseReference octoDB;
-    Question question;
-    ArrayList<String> imagesURLs;
+    private FirebaseAuth mAuth; //get the current user
+    DatabaseReference octoDB; //reference to our Database
+    Question question; // the current question
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +96,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             }
         });
         int curQNb = listOfQuestions.size();
-        tvQuestionNumber.setText("Question"+ curQNb +" of " + MAX_NB_QUESTIONS);
+        tvQuestionNumber.setText("Question "+ curQNb +" of " + MAX_NB_QUESTIONS);
         getQuestion("1");
     }
 
@@ -108,26 +107,18 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 question = new Question();
-                imagesURLs = new ArrayList<>();
-                imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
+                ArrayList<String> imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
                 question.setAnswer((String)snapshot.child("answer").getValue());
                 question.setMinage((Long)snapshot.child("minage").getValue());
-                question.setOptions((ArrayList)snapshot.child("options").getValue());
+                question.setOptions((ArrayList<String>)snapshot.child("options").getValue());
                 question.setPoints((Long)snapshot.child("points").getValue());
                 question.setStatement((String)snapshot.child("statement").getValue());
                 tvQuestion.setText(question.getStatement());
 
-                Picasso.get().load(imagesURLs.get(1)).into(imgBtnAnswerOne);
-                Picasso.get().load(imagesURLs.get(2)).into(imgBtnAnswerTwo);
-                Picasso.get().load(imagesURLs.get(3)).into(imgBtnAnswerThree);
-                Picasso.get().load(imagesURLs.get(4)).into(imgBtnAnswerFour);
-
-                /*for (int i = 0; i < groupOfImageButtons.size(); i++) {
-                    Picasso.get().load(imagesURLs.get(i)).into(groupOfImageButtons.get(i));
-                }*/
-
-                //his video
-                //https://www.youtube.com/watch?v=UDZpfYf-E7A&t=158s
+                Picasso.get().load(imagesURLs.get(1)).fit().into(imgBtnAnswerOne);
+                Picasso.get().load(imagesURLs.get(2)).fit().into(imgBtnAnswerTwo);
+                Picasso.get().load(imagesURLs.get(3)).fit().into(imgBtnAnswerThree);
+                Picasso.get().load(imagesURLs.get(4)).fit().into(imgBtnAnswerFour);
 
             }
             @Override
@@ -138,40 +129,43 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View view) {
-        attempt++;
         boolean result=false;
+        MediaPlayer mediaPlayerResult;
+        //ERROR I DONT KNOW WHY
+        ArrayList<String> test =question.getOptions(); //PLEASE DELETE ONCE ITS WORKING
+        String st = test.get(1);
+        ///
         switch(view.getId()){
             case R.id.imgBtnAnswerOne:
-               result= checkAns(2,attempt);
+               result= checkAns(question.getOptions().get(1));
                break;
             case R.id.imgBtnAnswerTwo:
-               result= checkAns(3,attempt);
+               result= checkAns(question.getOptions().get(2));
                break;
             case R.id.imgBtnAnswerThree:
-               result= checkAns(100,attempt);
+               result= checkAns(question.getOptions().get(3));
                break;
             case R.id.imgBtnAnswerFour:
-               result= checkAns(51,attempt);
+               result= checkAns(question.getOptions().get(4));
                break;
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION
                finish();
-               break;
+               return;
             default:
                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
-               break;
+               return;
         }
 
         Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
-        MediaPlayer mediaPlayerResult;
+
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
-           mediaPlayerResult.start();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
-            mediaPlayerResult.start();
         }
+        mediaPlayerResult.start();
     }
 
     private void showAlertDialog(int layout){
@@ -193,8 +187,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             }
         });
     }
-    private boolean checkAns(int i, int attempt) {
-        if(attempt <= 2 && question.getAnswer().compareTo(String.valueOf(i))==0){
+    private boolean checkAns(String questionAnswer) {
+        attempt++;
+        if(attempt <= 2 && question.getAnswer().compareTo(String.valueOf(questionAnswer))==0){
             return true;
         }
         return false;

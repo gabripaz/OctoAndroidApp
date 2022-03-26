@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -161,10 +162,15 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
 
         Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
+        MediaPlayer mediaPlayerResult;
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
+           mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
+           mediaPlayerResult.start();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
+            mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
+            mediaPlayerResult.start();
         }
     }
 

@@ -66,12 +66,12 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         MediaPlayer mp;
         switch (view.getId()){
             case R.id.btnQuestionsAnswers:
-                mp = MediaPlayer.create(this,R.raw.trill_c);
+                mp = MediaPlayer.create(this,R.raw.are_you_ready);
                 mp.start();
                 goToQuestionsAndAnswers();
                 break;
             case R.id.btnImageExplorer:
-                mp = MediaPlayer.create(this,R.raw.trill_f);
+                mp = MediaPlayer.create(this,R.raw.woo);
                 mp.start();
                 goToImageExplorer();
                 break;

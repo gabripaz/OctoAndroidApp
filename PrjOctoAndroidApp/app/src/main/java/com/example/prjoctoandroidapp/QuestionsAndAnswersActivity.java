@@ -45,6 +45,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     private FirebaseAuth mAuth; //get the current user
     DatabaseReference octoDB; //reference to our Database
     Question question; // the current question
+    ArrayList<String> imagesURLs;
+    ArrayList<Question> questionsList;
+    MediaPlayer mediaPlayerResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +80,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
         //Variables and objects
         attempt=0;
-        ArrayList<Question> listOfQuestions = (ArrayList<Question>) getIntent().getSerializableExtra("newRun");
-
+        questionsList = new ArrayList<Question>();
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
         mAuth = FirebaseAuth.getInstance();
@@ -91,13 +93,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-        int curQNb = listOfQuestions.size();
+        int curQNb = 1;
         tvQuestionNumber.setText("Question "+ curQNb +" of " + MAX_NB_QUESTIONS);
         getQuestion("1");
+        loadAllQuestions();
     }
 
     private void getQuestion(String questionID) {
@@ -107,19 +108,31 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 question = new Question();
-                ArrayList<String> imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
+                imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
                 question.setAnswer((String)snapshot.child("answer").getValue());
                 question.setMinage((Long)snapshot.child("minage").getValue());
                 question.setOptions((ArrayList<String>)snapshot.child("options").getValue());
                 question.setPoints((Long)snapshot.child("points").getValue());
                 question.setStatement((String)snapshot.child("statement").getValue());
                 tvQuestion.setText(question.getStatement());
+                fillImagesInButtons();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void loadAllQuestions() {
 
-                Picasso.get().load(imagesURLs.get(1)).fit().into(imgBtnAnswerOne);
-                Picasso.get().load(imagesURLs.get(2)).fit().into(imgBtnAnswerTwo);
-                Picasso.get().load(imagesURLs.get(3)).fit().into(imgBtnAnswerThree);
-                Picasso.get().load(imagesURLs.get(4)).fit().into(imgBtnAnswerFour);
-
+        DatabaseReference ques = FirebaseDatabase.getInstance().getReference("questions");
+        ques.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot aQuestion: snapshot.getChildren())
+                {
+                    Question q = aQuestion.getValue(Question.class);
+                    questionsList.add(q);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -127,26 +140,28 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         });
     }
 
+    private void fillImagesInButtons() {
+        Picasso.get().load(imagesURLs.get(1)).fit().into(imgBtnAnswerOne);
+        Picasso.get().load(imagesURLs.get(2)).fit().into(imgBtnAnswerTwo);
+        Picasso.get().load(imagesURLs.get(3)).fit().into(imgBtnAnswerThree);
+        Picasso.get().load(imagesURLs.get(4)).fit().into(imgBtnAnswerFour);
+    }
+
     @Override
     public void onClick(View view) {
         boolean result=false;
-        MediaPlayer mediaPlayerResult;
-        //ERROR I DONT KNOW WHY
-        ArrayList<String> test =question.getOptions(); //PLEASE DELETE ONCE ITS WORKING
-        String st = test.get(1);
-        ///
         switch(view.getId()){
             case R.id.imgBtnAnswerOne:
-               result= checkAns(question.getOptions().get(1));
+               result= checkAns(String.valueOf(question.getOptions().get(1)));
                break;
             case R.id.imgBtnAnswerTwo:
-               result= checkAns(question.getOptions().get(2));
+                result= checkAns(String.valueOf(question.getOptions().get(2)));
                break;
             case R.id.imgBtnAnswerThree:
-               result= checkAns(question.getOptions().get(3));
+                result= checkAns(String.valueOf(question.getOptions().get(3)));
                break;
             case R.id.imgBtnAnswerFour:
-               result= checkAns(question.getOptions().get(4));
+                result= checkAns(String.valueOf(question.getOptions().get(4)));
                break;
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION
                finish();
@@ -165,7 +180,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
         }
-        mediaPlayerResult.start();
+        //mediaPlayerResult.start();
     }
 
     private void showAlertDialog(int layout){

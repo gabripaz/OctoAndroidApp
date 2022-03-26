@@ -90,20 +90,6 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
-
-        //Test
-        ArrayList<Question> arQuestions= new ArrayList<Question>();
-        ArrayList<String> arString = new ArrayList<String>();
-        arString.add("a");
-        arString.add("b");
-        arString.add("c");
-        arString.add("d");
-        arQuestions.add(new Question("2","How much is 1+1?",null,null,null,2,5,500, arString));
-        intent.putExtra("newRun", arQuestions);
-
-        //Oficial line
-        //intent.putExtra("newRun", new ArrayList<Question>());
-
         startActivity(intent);
     }
 

@@ -176,11 +176,13 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
+           mediaPlayerResult.start();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
+            mediaPlayerResult.start();
         }
-        //mediaPlayerResult.start();
+
     }
 
     private void showAlertDialog(int layout){
@@ -198,7 +200,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
+                alertDialog.dismiss(); mediaPlayerResult.stop();
             }
         });
     }

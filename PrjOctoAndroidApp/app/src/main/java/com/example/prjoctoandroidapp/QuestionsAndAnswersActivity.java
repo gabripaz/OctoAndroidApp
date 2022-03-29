@@ -26,28 +26,30 @@ import com.squareup.picasso.PicassoProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import model.Profile;
 import model.Question;
+import model.RunOfQuestions;
 
 public class QuestionsAndAnswersActivity extends AppCompatActivity implements View.OnClickListener {
 
-    final int MAX_NB_QUESTIONS = 5;
-    int attempt;
+    private final int MAX_NB_QUESTIONS = 5;
+    private int attempt, curQuestionIndex;
 
     //Controls
-    ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, imgBtnAnswerFour;
-    ArrayList<ImageButton> groupOfImageButtons = new ArrayList<>(
+    private ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, imgBtnAnswerFour;
+    private ArrayList<ImageButton> groupOfImageButtons = new ArrayList<>(
             Arrays.asList(imgBtnAnswerOne,imgBtnAnswerTwo,imgBtnAnswerThree,imgBtnAnswerFour));
-    Button btnExit, btnSkip;
-    TextView tvKidsName, tvQuestion, tvQuestionNumber;
-
+    private Button btnExit, btnSkip;
+    private TextView tvKidsName, tvQuestion, tvQuestionNumber;
 
     //Objects
     private FirebaseAuth mAuth; //get the current user
-    DatabaseReference octoDB; //reference to our Database
-    Question question; // the current question
-    ArrayList<String> imagesURLs;
-    ArrayList<Question> questionsList;
-    MediaPlayer mediaPlayerResult;
+    private DatabaseReference octoDB; //reference to our Database
+    private Question question; // the current question
+    private Profile profile; //current profile
+    private MediaPlayer mediaPlayerResult;
+    private RunOfQuestions currentRun;
+    private ArrayList<Integer> skippedQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,72 +81,69 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         btnSkip.setOnClickListener(this);
 
         //Variables and objects
-        attempt=0;
-        questionsList = new ArrayList<Question>();
+        curQuestionIndex = 0;
+        currentRun = new RunOfQuestions(999);
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
-        mAuth = FirebaseAuth.getInstance();
-        DatabaseReference user = octoDB.child(mAuth.getUid()).child("username"); //Later we need to get the profile name.
-        user.addValueEventListener(new ValueEventListener() {
+        //mAuth = FirebaseAuth.getInstance();
+        //DatabaseReference profileReference = octoDB.child(mAuth.getUid()).child("profiles").child("0"); //Later we need to get the profile name.
+
+        String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
+        DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
+
+        profileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String aName = snapshot.getValue().toString();
-                tvKidsName.setText(aName);
+                profile = snapshot.getValue(Profile.class);
+                tvKidsName.setText(profile.getNickName());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-        int curQNb = 1;
-        tvQuestionNumber.setText("Question "+ curQNb +" of " + MAX_NB_QUESTIONS);
-        getQuestion("1");
         loadAllQuestions();
     }
 
-    private void getQuestion(String questionID) {
-
-        DatabaseReference ques = FirebaseDatabase.getInstance().getReference("questions").child(questionID);
-        ques.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                question = new Question();
-                imagesURLs = (ArrayList) snapshot.child("media").child("images").getValue();
-                question.setAnswer((String)snapshot.child("answer").getValue());
-                question.setMinage((Long)snapshot.child("minage").getValue());
-                question.setOptions((ArrayList<String>)snapshot.child("options").getValue());
-                question.setPoints((Long)snapshot.child("points").getValue());
-                question.setStatement((String)snapshot.child("statement").getValue());
-                tvQuestion.setText(question.getStatement());
-                fillImagesInButtons();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
     private void loadAllQuestions() {
-
         DatabaseReference ques = FirebaseDatabase.getInstance().getReference("questions");
         ques.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot aQuestion: snapshot.getChildren())
                 {
-                    Question q = aQuestion.getValue(Question.class);
-                    questionsList.add(q);
+                    Question oneQuestion = aQuestion.getValue(Question.class);
+                    oneQuestion.setImages((ArrayList<String>) aQuestion.child("media").child("images").getValue());
+                    if(oneQuestion.getMinage() <= profile.getAge())
+                        currentRun.getListOfQuestions().add(oneQuestion);
                 }
+                goToNextQuestion();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
+    private void goToNextQuestion() {
+        if(curQuestionIndex == currentRun.getListOfQuestions().size()){
+            displayResult();
+            return;
+        }
+        attempt = 0;
+        question = currentRun.getListOfQuestions().get(curQuestionIndex);
+        fillImagesInButtons();
+        tvQuestion.setText(question.getStatement());
+        curQuestionIndex++; //displaying is different from index.
+        tvQuestionNumber.setText("Question "+ curQuestionIndex +" of " + MAX_NB_QUESTIONS);
+    }
+
+    private void displayResult() {
+    }
 
     private void fillImagesInButtons() {
-        Picasso.get().load(imagesURLs.get(1)).fit().into(imgBtnAnswerOne);
-        Picasso.get().load(imagesURLs.get(2)).fit().into(imgBtnAnswerTwo);
-        Picasso.get().load(imagesURLs.get(3)).fit().into(imgBtnAnswerThree);
-        Picasso.get().load(imagesURLs.get(4)).fit().into(imgBtnAnswerFour);
+        Picasso.get().load(question.getImages().get(1)).fit().into(imgBtnAnswerOne);
+        Picasso.get().load(question.getImages().get(2)).fit().into(imgBtnAnswerTwo);
+        Picasso.get().load(question.getImages().get(3)).fit().into(imgBtnAnswerThree);
+        Picasso.get().load(question.getImages().get(4)).fit().into(imgBtnAnswerFour);
     }
 
     @Override
@@ -163,7 +162,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             case R.id.imgBtnAnswerFour:
                 result= checkAns(String.valueOf(question.getOptions().get(4)));
                break;
-            case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION
+            case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION BEFORE QUIT
                finish();
                return;
             default:
@@ -176,12 +175,11 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
-           mediaPlayerResult.start();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
-            mediaPlayerResult.start();
         }
+        if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 
     }
 
@@ -200,9 +198,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss(); mediaPlayerResult.stop();
+                alertDialog.dismiss();
+                if(mediaPlayerResult != null) mediaPlayerResult.stop();
+                if(attempt == 2)  goToNextQuestion();
             }
         });
+
     }
     private boolean checkAns(String questionAnswer) {
         attempt++;

@@ -83,6 +83,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         //Variables and objects
         curQuestionIndex = 0;
         currentRun = new RunOfQuestions(999);
+        skippedQuestions = new ArrayList<>();
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
         //mAuth = FirebaseAuth.getInstance();
@@ -125,7 +126,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     }
     private void goToNextQuestion() {
         if(curQuestionIndex == currentRun.getListOfQuestions().size()){
-            displayResult();
+            goToSkippedQuestions();
             return;
         }
         attempt = 0;
@@ -134,6 +135,20 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         tvQuestion.setText(question.getStatement());
         curQuestionIndex++; //displaying is different from index.
         tvQuestionNumber.setText("Question "+ curQuestionIndex +" of " + MAX_NB_QUESTIONS);
+    }
+
+    private void goToSkippedQuestions() {
+        if(skippedQuestions.isEmpty()){
+            displayResult();
+            return;
+        }
+        attempt = 0;
+        question = currentRun.getListOfQuestions().get(skippedQuestions.get(0));
+        fillImagesInButtons();
+        tvQuestion.setText(question.getStatement());
+        curQuestionIndex++; //displaying is different from index.
+        tvQuestionNumber.setText("Question (Skipped) "+ curQuestionIndex +" of " + MAX_NB_QUESTIONS);
+        skippedQuestions.remove(0);
     }
 
     private void displayResult() {
@@ -165,6 +180,8 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION BEFORE QUIT
                finish();
                return;
+            case R.id.btnSkip:
+                skipQuestion();
             default:
                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
                return;
@@ -175,12 +192,18 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
+           currentRun.setTotalPoints((int) (currentRun.getTotalPoints() + question.getPoints()));
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 
+    }
+
+    private void skipQuestion() {
+        skippedQuestions.add(curQuestionIndex);
+        goToNextQuestion();
     }
 
     private void showAlertDialog(int layout){

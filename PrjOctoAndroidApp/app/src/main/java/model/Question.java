@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Question implements Serializable {
     private String answer, statement;
-    private String images,musics,sounds;
+    private String musics,sounds;
     private long id;
     private long minage;
     private long points;
-    private ArrayList<String> options;
+    private ArrayList<String> options,images;
 
-    public Question(String answer, String statement, String images, String musics, String sounds, long id, long minage, long points, ArrayList<String> options) {
+    public Question(String answer, String statement, ArrayList<String> images, String musics, String sounds, long id, long minage, long points, ArrayList<String> options) {
         this.answer = answer;
         this.statement = statement;
         this.images = images;
@@ -32,9 +32,9 @@ public class Question implements Serializable {
 
     public void setStatement(String statement) {this.statement = statement;}
 
-    public String getImages() {return images;}
+    public ArrayList<String> getImages() {return images;}
 
-    public void setImages(String images) {this.images = images;}
+    public void setImages(ArrayList<String> images) {this.images = images;}
 
     public String getMusics() {return musics;}
 

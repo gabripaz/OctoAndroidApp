@@ -84,7 +84,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void goToImageExplorer() {
-        Intent intent = new Intent(this, MLTestActivity.class);
+        Intent intent = new Intent(this, ImageExploreActivity.class);
         startActivity(intent);
     }
 

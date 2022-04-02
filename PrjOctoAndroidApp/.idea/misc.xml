@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_explore.xml" value="0.14130434782608695" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_recog.xml" value="0.17552083333333332" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_mltest.xml" value="0.17552083333333332" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/result_rv_item.xml" value="0.17552083333333332" />

@@ -39,7 +39,7 @@
         android:layout_width="205dp"
         android:layout_height="112dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="106dp"
         android:ems="10"
         android:gravity="start|top"
@@ -47,4 +47,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgVwTest" />
+
+    <Button
+        android:id="@+id/btnTakePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edLabel"
+        android:text="Take a picture"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

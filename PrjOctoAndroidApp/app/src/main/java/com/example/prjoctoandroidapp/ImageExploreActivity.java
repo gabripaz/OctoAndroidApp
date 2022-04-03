@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -23,6 +27,7 @@ import com.google.mlkit.vision.label.ImageLabeler;
 import com.google.mlkit.vision.label.ImageLabeling;
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +38,12 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     ImageLabeler labeler;
     EditText edLabel;
     TextToSpeech tts;
+    //to take a picture
+    Button btnTakePic;
+    Bitmap imageBitmap;
+    Uri captureUri;
+    boolean flag=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,16 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
         imgVwTest.setOnClickListener(this);
         labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
         edLabel = findViewById(R.id.edLabel);
+        //button to take a picture
+        btnTakePic = findViewById(R.id.btnTakePic);
+        btnTakePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flag=true;
+                dispatchTakePictureIntent();
+            }
+        });
+
         tts = new TextToSpeech(this.getApplicationContext(),
                 new TextToSpeech.OnInitListener() {
                     @Override
@@ -111,7 +132,15 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     // Function to prepare input image from Uri and Context
     protected void prepareInputImage(){
         try {
-            imgToBeTested = InputImage.fromFilePath(this, getUriToDrawable(this,R.drawable.car));
+            //here we can get a the Uri from the picture taked by the user or we could use stored images
+            if(flag){
+                //if the user take a picture
+                imgToBeTested = InputImage.fromFilePath(this, captureUri);
+            }
+            else{
+                imgToBeTested = InputImage.fromFilePath(this, getUriToDrawable(this,R.drawable.car));
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,5 +156,41 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
                 + '/' + context.getResources().getResourceTypeName(drawableId)
                 + '/' + context.getResources().getResourceEntryName(drawableId) );
         return imageUri;
+    }
+
+
+    ///Function to capture an image
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        // inside this method we are calling an implicit intent to capture an image.
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // calling a start activity for result when image is captured.
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // inside on activity result method we are setting
+        // our image to our image view from bitmap.
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            // on below line we are setting our
+            // bitmap to our image view.
+            imgVwTest.setImageBitmap(imageBitmap);
+            captureUri = getImageUri(getApplicationContext(),imageBitmap);
+
+        }
+    }
+    //Function to get the Uri from the picture taked by the user
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 }

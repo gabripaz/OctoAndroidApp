@@ -6,54 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".ImageExploreActivity">
 
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/adobestock_107576651"
+        android:contentDescription="background" />
+
     <TextView
         android:id="@+id/tvTitle"
+        style="@style/Titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="177dp"
-        android:text="Image Explorer"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginTop="10dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+        android:text="Explorer Mode" />
 
     <ImageView
         android:id="@+id/imgVwTest"
         android:layout_width="316dp"
         android:layout_height="324dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:srcCompat="@drawable/car" />
-
-    <EditText
-        android:id="@+id/edLabel"
-        android:layout_width="205dp"
-        android:layout_height="112dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="106dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgVwTest" />
-
-    <Button
-        android:id="@+id/btnTakePic"
+    <TextView
+        android:id="@+id/tvThisIsLb"
+        style="@style/SubTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edLabel"
-        android:text="Take a picture"/>
+        app:layout_constraintTop_toBottomOf="@id/imgVwTest"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:text="This is:" />
+    <TextView
+        android:id="@+id/tvLabel"
+        style="@style/Titles_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="true"
+        android:letterSpacing=".2"
+        app:layout_constraintTop_toBottomOf="@id/tvThisIsLb"
+        android:text="" />
+
+
+    <Button
+        android:id="@+id/btnTakePic"
+        style="@style/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabel"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="#D6104E"
+        android:text="Take a picture"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"
+       />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,7 +37,7 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     ImageView imgVwTest;
     InputImage imgToBeTested;
     ImageLabeler labeler;
-    EditText edLabel;
+    TextView tvLabel;
     TextToSpeech tts;
     //to take a picture
     Button btnTakePic;
@@ -57,7 +58,7 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
         imgVwTest = findViewById(R.id.imgVwTest);
         imgVwTest.setOnClickListener(this);
         labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
-        edLabel = findViewById(R.id.edLabel);
+        tvLabel = findViewById(R.id.tvLabel);
         //button to take a picture
         btnTakePic = findViewById(R.id.btnTakePic);
         btnTakePic.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +107,7 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
                         // you can detect other objects.
                         // NOTE: The labeler will label 0 to the object which covers the most
                         // area in that picture.
-                        edLabel.setText(labels.get(0).getText());
+                        tvLabel.setText(labels.get(0).getText());
 
 
                         // The text to speech is not working in my laptop, try to see if it works in yours.

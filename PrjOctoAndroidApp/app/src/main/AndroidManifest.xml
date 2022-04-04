@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PrjOctoAndroidApp">
         <activity
+            android:name=".TransitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ImageExploreActivity"
             android:exported="false" />
         <activity

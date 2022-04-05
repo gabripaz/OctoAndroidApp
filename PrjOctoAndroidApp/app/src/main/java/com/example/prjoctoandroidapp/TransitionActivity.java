@@ -20,7 +20,7 @@ public class TransitionActivity extends AppCompatActivity {
         nextActivityType = getIntent().getStringExtra("activityType");
 
         seaVideo = findViewById(R.id.videoSea);
-        seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.sea);
+        seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.octo_loading);
         seaVideo.start();
         new CountDownTimer(2000, 1000) {
             public void onTick(long millisUntilFinished) {

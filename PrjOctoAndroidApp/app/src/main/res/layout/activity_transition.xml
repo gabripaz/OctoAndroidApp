@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".TransitionActivity"
     android:orientation="vertical"
-    android:background="@color/purple_200"
+    android:background="#2596be"
     >
 
 

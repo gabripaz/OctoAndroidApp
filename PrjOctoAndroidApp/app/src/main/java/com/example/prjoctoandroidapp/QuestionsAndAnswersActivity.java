@@ -231,6 +231,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     private boolean checkAns(String questionAnswer) {
         attempt++;
         if(attempt <= 2 && question.getAnswer().compareTo(String.valueOf(questionAnswer))==0){
+            attempt = 0;
             return true;
         }
         return false;

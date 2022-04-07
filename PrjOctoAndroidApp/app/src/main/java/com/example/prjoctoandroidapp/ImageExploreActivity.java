@@ -139,7 +139,7 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
                 imgToBeTested = InputImage.fromFilePath(this, captureUri);
             }
             else{
-                imgToBeTested = InputImage.fromFilePath(this, getUriToDrawable(this,R.drawable.car));
+                imgToBeTested = InputImage.fromFilePath(this, getUriToDrawable(this,R.drawable.octo));
             }
 
         } catch (IOException e) {

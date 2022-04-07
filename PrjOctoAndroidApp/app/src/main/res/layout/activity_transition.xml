@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".TransitionActivity"
     android:orientation="vertical"
-    android:background="#2596be"
+    android:background="#1cb8ce"
     >
 
 

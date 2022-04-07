@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:srcCompat="@drawable/car" />
+        app:srcCompat="@drawable/octo" />
     <TextView
         android:id="@+id/tvThisIsLb"
         style="@style/SubTitles"

@@ -195,7 +195,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
            currentRun.setTotalPoints((int) (currentRun.getTotalPoints() + question.getPoints()));
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
-            mediaPlayerResult = MediaPlayer.create(this,R.raw.wrong_ans_crow);
+            mediaPlayerResult = MediaPlayer.create(this,R.raw.faliure_wrongans);
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 

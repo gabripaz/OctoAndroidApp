@@ -25,7 +25,10 @@ import com.squareup.picasso.PicassoProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
+import model.EnumStatus;
 import model.Profile;
 import model.Question;
 import model.RunOfQuestions;
@@ -110,13 +113,20 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         ques.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot aQuestion: snapshot.getChildren())
-                {
+                ArrayList<Integer> listRandomIndexes = new ArrayList<>();
+                for (Integer i = 1; i < snapshot.getChildrenCount(); i++) {
+                    listRandomIndexes.add(i);
+                }
+                Collections.shuffle(listRandomIndexes);
+                for (Integer i = 0; i < MAX_NB_QUESTIONS; i++){
+                    Integer index = listRandomIndexes.get(i);
+                    DataSnapshot aQuestion = snapshot.child(index.toString());
                     Question oneQuestion = aQuestion.getValue(Question.class);
                     oneQuestion.setImages((ArrayList<String>) aQuestion.child("media").child("images").getValue());
                     if(oneQuestion.getMinage() <= profile.getAge())
                         currentRun.getListOfQuestions().add(oneQuestion);
                 }
+
                 goToNextQuestion();
             }
             @Override
@@ -124,6 +134,11 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             }
         });
     }
+
+    /**
+     * Go to the next question and fill widgets if the current question index is not
+     *  the same as the List of question size. If its equal, check the skipped ones.
+     */
     private void goToNextQuestion() {
         if(curQuestionIndex == currentRun.getListOfQuestions().size()){
             goToSkippedQuestions();
@@ -137,6 +152,10 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         tvQuestionNumber.setText("Question "+ curQuestionIndex +" of " + MAX_NB_QUESTIONS);
     }
 
+    /**
+     * Go to the next skipped question and then removes the index of skipped from the list.
+     * Else finish the run.
+     */
     private void goToSkippedQuestions() {
         if(skippedQuestions.isEmpty()){
             displayResult();
@@ -152,6 +171,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     }
 
     private void displayResult() {
+        currentRun.setStatus(EnumStatus.FINISHED);
     }
 
     private void fillImagesInButtons() {

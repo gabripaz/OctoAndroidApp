@@ -182,6 +182,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                return;
             case R.id.btnSkip:
                 skipQuestion();
+                return;
             default:
                Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show();
                return;
@@ -193,6 +194,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
            currentRun.setTotalPoints((int) (currentRun.getTotalPoints() + question.getPoints()));
+           goToNextQuestion();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
             mediaPlayerResult = MediaPlayer.create(this,R.raw.faliure_wrongans);

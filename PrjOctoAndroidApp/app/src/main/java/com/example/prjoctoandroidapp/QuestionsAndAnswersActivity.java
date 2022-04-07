@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -208,8 +209,13 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                return;
         }
 
-        Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
-
+       // Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
+        if(curQuestionIndex == MAX_NB_QUESTIONS){
+            //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,ProgressActivity.class);
+            intent.putExtra("TotalPoints",currentRun.getTotalPoints());
+            startActivity(intent);
+        }
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);

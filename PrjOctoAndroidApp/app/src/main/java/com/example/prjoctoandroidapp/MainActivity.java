@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -66,21 +67,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case(R.id.btnStart):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerStart = MediaPlayer.create(this,R.raw.start_ride);
+                MediaPlayer mediaPlayerStart = MediaPlayer.create(this,R.raw.btn_click_pop);
                 mediaPlayerStart.setVolume(60,60);
                 mediaPlayerStart.start();
                 goStart();
                 break;
             case(R.id.btnAddPlayer):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerAddp = MediaPlayer.create(this,R.raw.add_player_db_hit);
+                MediaPlayer mediaPlayerAddp = MediaPlayer.create(this,R.raw.kid_who_r_u);
                 mediaPlayerAddp.setVolume(60,60);
                 mediaPlayerAddp.start();
                 goToAddPlayer();
             break;
             case(R.id.btnConfigAcc):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerConfig = MediaPlayer.create(this,R.raw.player_config_rattle);
+                MediaPlayer mediaPlayerConfig = MediaPlayer.create(this,R.raw.btn_click_pop2);
                 mediaPlayerConfig.setVolume(60,60);
                 mediaPlayerConfig.start();
                 goUserAcc();
@@ -137,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
          super.onStart();
          MainAudioStart();
+         MediaPlayer mediaPlayerWelcome;
          FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
          if(currUser == null){
              btnStart.setVisibility(View.GONE);
@@ -144,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              btnConfigAcc.setVisibility(View.GONE);
              btnAddPlayer.setVisibility(View.GONE);
              Toast.makeText(this,"No users login yet", Toast.LENGTH_SHORT).show();
+             mediaPlayerWelcome = MediaPlayer.create(this,R.raw.kid_welcome);
+             mediaPlayerWelcome.start();
          }
          else{
              btnStart.setVisibility(View.VISIBLE);
@@ -152,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              btnAddPlayer.setVisibility(View.VISIBLE);
              btnLogin.setVisibility(View.GONE);
              btnCreateAcc.setVisibility(View.GONE);
+             mediaPlayerWelcome = MediaPlayer.create(this,R.raw.kid_welcome_back);
+             mediaPlayerWelcome.start();
          }
      }
 

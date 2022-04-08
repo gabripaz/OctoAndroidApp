@@ -44,12 +44,12 @@ public class TransitionActivity extends AppCompatActivity {
 
         switch (nextActivityType){
             case "imageExplorer":
-                mp = MediaPlayer.create(this,R.raw.woo);
+                mp = MediaPlayer.create(this,R.raw.kid_what_looking_for);
                 mp.start();
                 goToImageExplorer();
                 break;
             case "questionsAnswers":
-                mp = MediaPlayer.create(this,R.raw.are_you_ready);
+                mp = MediaPlayer.create(this,R.raw.kid_are_you_ready);
                 mp.start();
                 goToQuestionsAndAnswers();
                 break;

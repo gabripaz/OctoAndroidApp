@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ImageExploreActivity">
 
+    <Button
+        android:id="@+id/btnExit"
+        style="@style/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_selector"
+        android:backgroundTint="@color/purple_500"
+        android:text="Exit"
+        android:textAllCaps="false"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <ImageView
         android:id="@+id/imgBackground"
         android:layout_width="fill_parent"

@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,11 +41,11 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     TextView tvLabel;
     TextToSpeech tts;
     //to take a picture
-    Button btnTakePic;
+    Button btnTakePic, btnReturn;
     Bitmap imageBitmap;
     Uri captureUri;
     boolean flag=false;
-
+    MediaPlayer mediaPlayerIEX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,11 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initialize() {
+        mediaPlayerIEX = MediaPlayer.create(this,R.raw.playground_music);
+        btnReturn = findViewById(R.id.btnExit);
+        btnReturn.setOnClickListener(this);
+        mediaPlayerIEX.setLooping(true);
+        mediaPlayerIEX.start();
         imgVwTest = findViewById(R.id.imgVwTest);
         imgVwTest.setOnClickListener(this);
         labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS);
@@ -92,6 +98,9 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         prepareInputImage();
         processImage();
+        if(view.getId() == btnReturn.getId()){
+            mediaPlayerIEX.stop();
+        }
     }
 
     //  To process the image and finding all the objects inside an image

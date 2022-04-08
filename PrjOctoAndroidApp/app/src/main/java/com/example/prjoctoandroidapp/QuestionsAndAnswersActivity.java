@@ -51,7 +51,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     private DatabaseReference octoDB; //reference to our Database
     private Question question; // the current question
     private Profile profile; //current profile
-    private MediaPlayer mediaPlayerResult;
+    private MediaPlayer mediaPlayerResult, mediaPlayerBackMusic;
     private RunOfQuestions currentRun;
     private ArrayList<Integer> skippedQuestions;
 
@@ -68,7 +68,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         imgBtnAnswerTwo     =  findViewById(R.id.imgBtnAnswerTwo);
         imgBtnAnswerThree   =  findViewById(R.id.imgBtnAnswerThree);
         imgBtnAnswerFour =  findViewById(R.id.imgBtnAnswerFour);
-
+        mediaPlayerBackMusic = MediaPlayer.create(this,R.raw.playground_music);
+        mediaPlayerBackMusic.setLooping(true);
+        mediaPlayerBackMusic.start();
         btnExit             =  findViewById(R.id.btnExit);
         btnSkip             =  findViewById(R.id.btnSkip);
 
@@ -199,7 +201,9 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                 result= checkAns(String.valueOf(question.getOptions().get(4)));
                break;
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION BEFORE QUIT
-               finish();
+                mediaPlayerBackMusic.stop();
+                finish();
+
                return;
             case R.id.btnSkip:
                 skipQuestion();
@@ -218,12 +222,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
-           mediaPlayerResult = MediaPlayer.create(this,R.raw.right_answer_applause);
+           mediaPlayerResult = MediaPlayer.create(this,R.raw.kid_bravo);
            currentRun.setTotalPoints((int) (currentRun.getTotalPoints() + question.getPoints()));
            goToNextQuestion();
         }else{
             showAlertDialog(R.layout.dialog_negative_layout);
-            mediaPlayerResult = MediaPlayer.create(this,R.raw.faliure_wrongans);
+            mediaPlayerResult = MediaPlayer.create(this,R.raw.kid_mocking_laugh);
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 

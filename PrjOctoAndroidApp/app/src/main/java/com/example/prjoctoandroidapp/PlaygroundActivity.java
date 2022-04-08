@@ -26,6 +26,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
     Button btnQuetAndAnsw, btnImgExplorer, btnReturn;
     TextView tvKidsName, tvKidsLevel,tvKidsPoints;
     ImageView kidsAvatar;
+    MediaPlayer mediaPlayerPlayground;
 
     //Variables
     int profileID;
@@ -58,7 +59,9 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         mAuth = FirebaseAuth.getInstance();
         //We need to get the profile ID to go further.
         //currentProfile = octoDB.child(mAuth.getUid()).child("profile").child(profileID);
-
+        mediaPlayerPlayground = MediaPlayer.create(this,R.raw.calm_music);
+        mediaPlayerPlayground.setLooping(true);
+        mediaPlayerPlayground.start();
     }
 
     @Override
@@ -67,13 +70,16 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.btnQuestionsAnswers:
                 goToQuestionsAndAnswers();
+                mediaPlayerPlayground.stop();
                 break;
             case R.id.btnImageExplorer:
                 goToImageExplorer();
+                mediaPlayerPlayground.stop();
                 break;
             case R.id.btnReturn:
                 mp = MediaPlayer.create(this,R.raw.return_zip);
                 mp.start();
+                mediaPlayerPlayground.stop();
                 backToMain();
                 break;
         }

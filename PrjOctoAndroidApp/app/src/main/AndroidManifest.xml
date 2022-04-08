@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PrjOctoAndroidApp">
         <activity
+            android:name=".AddProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProgressActivity"
             android:exported="false" />
         <activity

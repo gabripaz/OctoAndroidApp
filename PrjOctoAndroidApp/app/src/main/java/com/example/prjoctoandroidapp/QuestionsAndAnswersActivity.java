@@ -215,6 +215,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
        // Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
         if(curQuestionIndex == MAX_NB_QUESTIONS){
+
             //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,ProgressActivity.class);
             intent.putExtra("TotalPoints",currentRun.getTotalPoints());

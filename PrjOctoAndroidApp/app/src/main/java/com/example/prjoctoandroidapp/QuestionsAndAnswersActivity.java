@@ -214,13 +214,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
 
        // Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
-        if(curQuestionIndex == MAX_NB_QUESTIONS){
 
-            //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,ProgressActivity.class);
-            intent.putExtra("TotalPoints",currentRun.getTotalPoints());
-            startActivity(intent);
-        }
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.kid_bravo);
@@ -232,6 +226,13 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 
+        if(curQuestionIndex == MAX_NB_QUESTIONS){
+
+            //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,ProgressActivity.class);
+            intent.putExtra("TotalPoints",currentRun.getTotalPoints());
+            startActivity(intent);
+        }
     }
 
     private void skipQuestion() {

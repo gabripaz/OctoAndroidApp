@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,9 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import model.Profile;
 
-public class ProgressActivity extends AppCompatActivity {
+public class ProgressActivity extends AppCompatActivity{
 
     private TextView tvKidsName,tvResult;
+    Button btnExit;
     //Objects
     private FirebaseAuth mAuth; //get the current user
     private DatabaseReference octoDB; //reference to our Database
@@ -34,6 +37,14 @@ public class ProgressActivity extends AppCompatActivity {
     private void Initialization() {
         tvKidsName =  findViewById(R.id.tvKidsName);
         tvResult = findViewById(R.id.tvResult);
+        btnExit = findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
         //mAuth = FirebaseAuth.getInstance();
@@ -48,7 +59,7 @@ public class ProgressActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
-                tvResult.setText(tvResult.getText()+String.valueOf(point)+"Total :" +String.valueOf(profile.getPoints()));
+                tvResult.setText(tvResult.getText()+String.valueOf(point)+" \n Total :" +String.valueOf(4000+point));
 
             }
 

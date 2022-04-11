@@ -143,7 +143,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
      *  the same as the List of question size. If its equal, check the skipped ones.
      */
     private void goToNextQuestion() {
-        if(curQuestionIndex == currentRun.getListOfQuestions().size()){
+        if(curQuestionIndex >= currentRun.getListOfQuestions().size()){
             goToSkippedQuestions();
             return;
         }
@@ -175,6 +175,11 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
     private void displayResult() {
         currentRun.setStatus(EnumStatus.FINISHED);
+        //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,ProgressActivity.class);
+        intent.putExtra("TotalPoints",currentRun.getTotalPoints());
+        startActivity(intent);
+        finish();
     }
 
     private void fillImagesInButtons() {
@@ -203,7 +208,6 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION BEFORE QUIT
                 mediaPlayerBackMusic.stop();
                 finish();
-
                return;
             case R.id.btnSkip:
                 skipQuestion();
@@ -226,13 +230,6 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
 
-        if(curQuestionIndex == MAX_NB_QUESTIONS){
-
-            //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,ProgressActivity.class);
-            intent.putExtra("TotalPoints",currentRun.getTotalPoints());
-            startActivity(intent);
-        }
     }
 
     private void skipQuestion() {

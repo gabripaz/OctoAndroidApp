@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class RunOfQuestions implements Serializable {
     private ArrayList<Question> listOfQuestions;
-    private LocalDateTime date;
+    private String date;
     private EnumStatus status;
     private Integer totalPoints;
     private int id;
 
-    public RunOfQuestions(ArrayList<Question> listOfQuestions, LocalDateTime date, EnumStatus status, Integer totalPoints, int id) {
+    public RunOfQuestions(ArrayList<Question> listOfQuestions, String date, EnumStatus status, Integer totalPoints, int id) {
         this.listOfQuestions = listOfQuestions;
         this.date = date;
         this.status = status;
@@ -31,9 +31,9 @@ public class RunOfQuestions implements Serializable {
 
     public void setListOfQuestions(ArrayList<Question> listOfQuestions) {this.listOfQuestions = listOfQuestions;}
 
-    public LocalDateTime getDate() {return date;}
+    public String getDate() {return date;}
 
-    public void setDate(LocalDateTime date) {this.date = date; }
+    public void setDate(String date) {this.date = date; }
 
     public EnumStatus getStatus() {return status;}
 

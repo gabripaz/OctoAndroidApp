@@ -59,7 +59,7 @@ public class ProgressActivity extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
-                tvResult.setText(tvResult.getText()+String.valueOf(point)+" \n Total :" +String.valueOf(4000+point));
+                tvResult.setText(tvResult.getText()+String.valueOf(point)+" \n Total :" +String.valueOf(profile.getPoints()+point));
 
             }
 

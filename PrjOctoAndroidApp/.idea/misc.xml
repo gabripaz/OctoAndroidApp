@@ -25,12 +25,14 @@
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable/button_released.xml" value="0.292" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable/button_selector.xml" value="0.292" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable/round_edit_text.xml" value="0.292" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable/rounded_imageview.xml" value="0.195" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_add_player.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_explore.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_login.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_mltest.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_playground.xml" value="0.1" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_progress.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_questions_and_answers.xml" value="0.33" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_registration.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_transition.xml" value="0.365625" />
@@ -38,6 +40,7 @@
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/result_rv_item.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/mipmap-anydpi-v26/octo_logo_v2_round.xml" value="0.325" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/mipmap-anydpi-v26/octo_logo_v3_round.xml" value="0.292" />
+        <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/mipmap-anydpi-v26/round_button.xml" value="0.195" />
         <entry key="..\:/Users/Rameswari/Documents/GitHub/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_progress.xml" value="0.2117948717948718" />
         <entry key="..\:/Users/Rameswari/Documents/GitHub/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_questions_and_answers.xml" value="0.25" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_add_player.xml" value="0.33" />

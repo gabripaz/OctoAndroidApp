@@ -56,8 +56,8 @@ public class TransitionActivity extends AppCompatActivity {
                 goToQuestionsAndAnswers();
                 break;
             case "afterQuestions": case"afterExplorer":
-                mp = MediaPlayer.create(this,R.raw.kid_great_job_short);//here can be another sound
-                mp.start();
+//                mp = MediaPlayer.create(this,R.raw.kid_great_job_short);//here can be another sound like lets play again
+//                mp.start();
                 goToPlayGround();
                 break;
 

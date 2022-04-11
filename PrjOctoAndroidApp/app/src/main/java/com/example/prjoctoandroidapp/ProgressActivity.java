@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +24,9 @@ import model.Profile;
 public class ProgressActivity extends AppCompatActivity{
 
     private TextView tvKidsName,tvResult;
+    VideoView seaVideo;
     Button btnExit;
+    MediaPlayer mp;
     //Objects
     private FirebaseAuth mAuth; //get the current user
     private DatabaseReference octoDB; //reference to our Database
@@ -37,6 +42,12 @@ public class ProgressActivity extends AppCompatActivity{
     private void Initialization() {
         tvKidsName =  findViewById(R.id.tvKidsName);
         tvResult = findViewById(R.id.tvResult);
+        seaVideo = findViewById(R.id.videoResult);
+
+        seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.celebrateocto);
+        seaVideo.start();
+        mp = MediaPlayer.create(this,R.raw.kid_great_job_short);
+        mp.start();
         btnExit = findViewById(R.id.btnExit);
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +55,7 @@ public class ProgressActivity extends AppCompatActivity{
                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
                intent. putExtra("activityType", "afterQuestions");
                startActivity(intent);
+                seaVideo.stopPlayback();
                 finish();
             }
         });

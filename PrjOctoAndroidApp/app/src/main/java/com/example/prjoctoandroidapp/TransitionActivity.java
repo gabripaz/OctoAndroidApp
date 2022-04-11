@@ -20,7 +20,9 @@ public class TransitionActivity extends AppCompatActivity {
         nextActivityType = getIntent().getStringExtra("activityType");
 
         seaVideo = findViewById(R.id.videoSea);
+
         seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.octo_loading);
+
         seaVideo.start();
         new CountDownTimer(2000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -53,8 +55,20 @@ public class TransitionActivity extends AppCompatActivity {
                 mp.start();
                 goToQuestionsAndAnswers();
                 break;
+            case "afterQuestions": case"afterExplorer":
+                mp = MediaPlayer.create(this,R.raw.kid_great_job_short);//here can be another sound
+                mp.start();
+                goToPlayGround();
+                break;
+
         }
     }
+
+    private void goToPlayGround() {
+        Intent intent = new Intent(this, PlaygroundActivity.class);
+        startActivity(intent);
+    }
+
     private void goToImageExplorer() {
         Intent intent = new Intent(this, ImageExploreActivity.class);
         startActivity(intent);

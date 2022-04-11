@@ -98,9 +98,19 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         prepareInputImage();
         processImage();
-        if(view.getId() == btnReturn.getId()){
+
+        if(view.getId() == R.id.btnExit){
             mediaPlayerIEX.stop();
+            goToPlayground();
+            finish();
         }
+
+    }
+
+    private void goToPlayground() {
+        Intent intent = new Intent(this, TransitionActivity.class);
+        intent.putExtra("activityType","afterExplorer");
+        startActivity(intent);
     }
 
     //  To process the image and finding all the objects inside an image

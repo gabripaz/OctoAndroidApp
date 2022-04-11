@@ -6,6 +6,7 @@
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_explore.xml" value="0.14130434782608695" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_recog.xml" value="0.17552083333333332" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_mltest.xml" value="0.17552083333333332" />
+        <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_questions_and_answers.xml" value="0.14130434782608695" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/activity_transition.xml" value="0.14130434782608695" />
         <entry key="..\:/Android-Project/PrjOctoAndroidApp/app/src/main/res/layout/result_rv_item.xml" value="0.17552083333333332" />
         <entry key="..\:/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
@@ -37,15 +38,20 @@
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/result_rv_item.xml" value="0.365625" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/mipmap-anydpi-v26/octo_logo_v2_round.xml" value="0.325" />
         <entry key="..\:/Users/Andres/AndroidStudioProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/mipmap-anydpi-v26/octo_logo_v3_round.xml" value="0.292" />
-        <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1845" />
+        <entry key="..\:/Users/Rameswari/Documents/GitHub/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_progress.xml" value="0.2117948717948718" />
+        <entry key="..\:/Users/Rameswari/Documents/GitHub/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_questions_and_answers.xml" value="0.25" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_add_player.xml" value="0.33" />
-        <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_image_explore.xml" value="0.17760416666666667" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_playground.xml" value="0.2658514492753623" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_questions_and_answers.xml" value="0.33" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_registration.xml" value="0.2658514492753623" />
         <entry key="..\:/Users/gabri/Documents/AndroidProjects/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_user_account.xml" value="0.2658514492753623" />
+        <entry key="..\:/Users/overl/Documents/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_add_profile.xml" value="0.25" />
+        <entry key="..\:/Users/overl/Documents/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/overl/Documents/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/main_item.xml" value="0.264" />
+        <entry key="..\:/Users/overl/Documents/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/layout/update_popup.xml" value="0.264" />
+        <entry key="..\:/Users/overl/Documents/OctoAndroidApp/PrjOctoAndroidApp/app/src/main/res/menu/menu.xml" value="0.16" />
       </map>
     </option>
   </component>

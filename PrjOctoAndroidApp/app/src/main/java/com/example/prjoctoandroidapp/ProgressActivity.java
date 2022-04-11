@@ -41,6 +41,9 @@ public class ProgressActivity extends AppCompatActivity{
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
+               intent. putExtra("activityType", "afterQuestions");
+               startActivity(intent);
                 finish();
             }
         });

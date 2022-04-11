@@ -179,6 +179,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         Intent intent = new Intent(this,ProgressActivity.class);
         intent.putExtra("TotalPoints",currentRun.getTotalPoints());
         startActivity(intent);
+        mediaPlayerBackMusic.stop();
         finish();
     }
 

@@ -46,11 +46,11 @@ public class ProgressActivity extends AppCompatActivity{
         });
 
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
+        Intent intent = getIntent();
+        int point = intent.getIntExtra("TotalPoints",0);
 
         //mAuth = FirebaseAuth.getInstance();
         //DatabaseReference profileReference = octoDB.child(mAuth.getUid()).child("profiles").child("0"); //Later we need to get the profile name.
-        Intent intent = getIntent();
-        int point = intent.getIntExtra("TotalPoints",0);
         String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
         DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
 
@@ -59,7 +59,7 @@ public class ProgressActivity extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
-                tvResult.setText(tvResult.getText()+String.valueOf(point)+" \n Total :" +String.valueOf(profile.getPoints()+point));
+                tvResult.setText("Very good! you did "+tvResult.getText()+String.valueOf(point)+" points! \n And know you have total of" +String.valueOf(profile.getPoints()+point));
 
             }
 

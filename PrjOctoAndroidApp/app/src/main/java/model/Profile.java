@@ -8,6 +8,7 @@ public class Profile implements Serializable {
     private String avatarUrl;
     private int age;
     private int points;
+
     private ArrayList<Reward> rewards;
     private ArrayList<RunOfQuestions> listOfRuns;
 

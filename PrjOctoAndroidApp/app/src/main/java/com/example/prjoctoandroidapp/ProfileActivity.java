@@ -1,12 +1,20 @@
 package com.example.prjoctoandroidapp;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -20,8 +28,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,6 +46,13 @@ public class ProfileActivity extends AppCompatActivity {
     private CircleImageView circleImageView;
     private TextView tvNickname;
     private FloatingActionButton btnAdd;
+
+    DatabaseReference octoDatabase;
+    FirebaseStorage storage;
+    StorageReference storageReference, sRef;
+    ActivityResultLauncher activityResultLauncher;
+    Uri filePath;
+    ProgressDialog progressDialog;
 
     String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -52,8 +71,24 @@ public class ProfileActivity extends AppCompatActivity {
         tvNickname = findViewById(R.id.tvUsername);
         btnAdd = findViewById(R.id.btnAdd);
 
+        octoDatabase = FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles");
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        try {
+                            getPhoto(result);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        );
 
         FirebaseRecyclerOptions<Profile> options =
                 new FirebaseRecyclerOptions.Builder<Profile>()
@@ -70,6 +105,20 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), AddPlayerActivity.class));
             }
         });
+    }
+
+    private void getPhoto(ActivityResult result) {
+        if(result.getResultCode()==RESULT_OK && result.getData()!= null) {
+            filePath = result.getData().getData();
+            Bitmap bitmapPhoto = null;
+            try {
+                bitmapPhoto = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                circleImageView.setImageBitmap(bitmapPhoto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override

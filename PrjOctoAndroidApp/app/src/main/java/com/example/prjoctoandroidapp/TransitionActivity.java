@@ -77,6 +77,9 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
+
+        intent.putExtra("profileID",getIntent().getStringExtra("profileID"));
+
         startActivity(intent);
 
     }

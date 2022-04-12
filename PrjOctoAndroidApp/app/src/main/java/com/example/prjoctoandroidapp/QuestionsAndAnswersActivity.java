@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,10 +25,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.PicassoProvider;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.EnumStatus;
 import model.Profile;
@@ -41,14 +45,13 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
     //Controls
     private ImageButton imgBtnAnswerOne, imgBtnAnswerTwo,imgBtnAnswerThree, imgBtnAnswerFour;
-    private ArrayList<ImageButton> groupOfImageButtons = new ArrayList<>(
-            Arrays.asList(imgBtnAnswerOne,imgBtnAnswerTwo,imgBtnAnswerThree,imgBtnAnswerFour));
     private Button btnExit, btnSkip;
     private TextView tvKidsName, tvQuestion, tvQuestionNumber;
 
     //Objects
     private FirebaseAuth mAuth; //get the current user
     private DatabaseReference octoDB; //reference to our Database
+    private DatabaseReference profileReference; //reference to the current profile.
     private Question question; // the current question
     private Profile profile; //current profile
     private MediaPlayer mediaPlayerResult, mediaPlayerBackMusic;
@@ -88,21 +91,22 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
 
         //Variables and objects
         curQuestionIndex = 0;
-        currentRun = new RunOfQuestions(999);
         skippedQuestions = new ArrayList<>();
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
 
-        //mAuth = FirebaseAuth.getInstance();
-        //DatabaseReference profileReference = octoDB.child(mAuth.getUid()).child("profiles").child("0"); //Later we need to get the profile name.
+        mAuth = FirebaseAuth.getInstance();
+        String profileID = getIntent().getStringExtra("profileID");
+        profileReference = octoDB.child(mAuth.getUid()).child("profiles").child(profileID); //Later we need to get the profile name.
 
-        String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
-        DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
+        //String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
+        //DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
 
         profileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
+                currentRun = new RunOfQuestions(profile.getLastFreeRunIndex());
             }
 
             @Override
@@ -173,9 +177,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         skippedQuestions.remove(0);
     }
 
+    /**
+     * Update the result and display it in another intent.
+     */
     private void displayResult() {
         currentRun.setStatus(EnumStatus.FINISHED);
-        //Toast.makeText(this, "Total Points"+currentRun.getTotalPoints(), Toast.LENGTH_SHORT).show();
+        SaveResult();
         Intent intent = new Intent(this,ProgressActivity.class);
         intent.putExtra("TotalPoints",currentRun.getTotalPoints());
         startActivity(intent);
@@ -183,11 +190,29 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         finish();
     }
 
+    private void SaveResult() {
+        Map<String, Object> run = new HashMap<>();
+        run.put("id", String.valueOf(currentRun.getId()));
+        run.put("points", currentRun.getTotalPoints());
+        run.put("status", currentRun.getStatus());
+        run.put("listOfQuestions", currentRun.getListofQuestionsIds());
+        //run.put("date", String.valueOf(currentRun.TodaysDate()));
+        profileReference.child("runs").child(String.valueOf(currentRun.getId())).setValue(run);
+    }
+
+    /**
+     * Inflate the images inside the images options from the url
+     */
     private void fillImagesInButtons() {
-        Picasso.get().load(question.getImages().get(1)).fit().into(imgBtnAnswerOne);
-        Picasso.get().load(question.getImages().get(2)).fit().into(imgBtnAnswerTwo);
-        Picasso.get().load(question.getImages().get(3)).fit().into(imgBtnAnswerThree);
-        Picasso.get().load(question.getImages().get(4)).fit().into(imgBtnAnswerFour);
+        ArrayList<ImageButton> groupOfImageButtons = new ArrayList<>(
+                Arrays.asList(imgBtnAnswerOne,imgBtnAnswerTwo,imgBtnAnswerThree,imgBtnAnswerFour));
+        for (int i = 1; i <= 4 ; i++) {
+            try{
+                Picasso.get().load(question.getImages().get(i)).fit().into(groupOfImageButtons.get(i-1));
+            }catch (Exception e){
+                Log.e(null, e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -208,6 +233,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                break;
             case R.id.btnExit: //NEED TO IMPLEMENT CONFIRMATION BEFORE QUIT
                 mediaPlayerBackMusic.stop();
+                currentRun.setStatus(EnumStatus.ABORTED);
                 finish();
                return;
             case R.id.btnSkip:
@@ -218,8 +244,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
                return;
         }
 
-       // Toast.makeText(this, "Result is:"+result, Toast.LENGTH_SHORT).show();
-
+        //Display dialog box of result.
         if(result == true){
            showAlertDialog(R.layout.dialog_postive_layout);
            mediaPlayerResult = MediaPlayer.create(this,R.raw.kid_bravo);
@@ -230,7 +255,6 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
             mediaPlayerResult = MediaPlayer.create(this,R.raw.kid_mocking_laugh);
         }
         if(mediaPlayerResult != null) mediaPlayerResult.start(); //crashing in my emulator, please uncomment
-
     }
 
     private void skipQuestion() {
@@ -239,14 +263,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
     }
 
     private void showAlertDialog(int layout){
-        //AlertDialog dialogBuilder = new AlertDialog.Builder(this);
         AlertDialog.Builder dialogBuilder
                 = new AlertDialog
                 .Builder(this);
         View layoutView = getLayoutInflater().inflate(layout, null);
         Button dialogButton = layoutView.findViewById(R.id.btnDialog);
         dialogBuilder.setView(layoutView);
-        //alertDialog = dialogBuilder.create();
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();

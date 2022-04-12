@@ -46,4 +46,17 @@ public class RunOfQuestions implements Serializable {
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
+
+    public String getListofQuestionsIds(){
+        ArrayList<String> questions = new ArrayList<String>();
+        for ( Question question : listOfQuestions
+             ) {
+            questions.add(String.valueOf(question.getId()));
+        }
+        return String.join(",",questions);
+    }
+
+    public LocalDateTime TodaysDate(){
+        return LocalDateTime.now();
+    }
 }

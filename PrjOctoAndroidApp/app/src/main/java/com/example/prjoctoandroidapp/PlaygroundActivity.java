@@ -116,6 +116,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, TransitionActivity.class);
         intent.putExtra("activityType","questionsAnswers");
+        intent.putExtra("profileID",profileID);
         startActivity(intent);
         finish();
     }

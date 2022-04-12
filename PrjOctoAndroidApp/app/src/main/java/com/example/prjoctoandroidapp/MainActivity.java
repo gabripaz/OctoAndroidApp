@@ -53,44 +53,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case (R.id.btnLogin):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
+                /*MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
                 mediaPlayerLogin.setVolume(60,60);
-                mediaPlayerLogin.start();
+                mediaPlayerLogin.start();*/
                 goLogin();
                 break;
             case(R.id.btnRegister):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
-                mediaPlayerRegister.setVolume(60,60);
-                mediaPlayerRegister.start();
+                /*MediaPlayer mediaPlayerRegister = MediaPlayer.create(this,R.raw.register_waterdrop);
+                //mediaPlayerRegister.setVolume(60,60);
+                mediaPlayerRegister.start();*/
                 goCreateAcc();
                 break;
             case(R.id.btnStart):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerStart = MediaPlayer.create(this,R.raw.btn_click_pop);
+                /*MediaPlayer mediaPlayerStart = MediaPlayer.create(this,R.raw.btn_click_pop);
                 mediaPlayerStart.setVolume(60,60);
-                mediaPlayerStart.start();
+                mediaPlayerStart.start();*/
                 goStart();
                 break;
             case(R.id.btnAddPlayer):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerAddp = MediaPlayer.create(this,R.raw.kid_who_r_u);
+                /*MediaPlayer mediaPlayerAddp = MediaPlayer.create(this,R.raw.kid_who_r_u);
                 mediaPlayerAddp.setVolume(60,60);
-                mediaPlayerAddp.start();
+                mediaPlayerAddp.start();*/
                 goToAddPlayer();
             break;
             case(R.id.btnConfigAcc):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerConfig = MediaPlayer.create(this,R.raw.btn_click_pop2);
+                /*MediaPlayer mediaPlayerConfig = MediaPlayer.create(this,R.raw.btn_click_pop2);
                 mediaPlayerConfig.setVolume(60,60);
-                mediaPlayerConfig.start();
+                mediaPlayerConfig.start();*/
                 goUserAcc();
                 break;
             case(R.id.btnLogout):
                 mediaPlayerMain.stop();
-                MediaPlayer mediaPlayerLogOut = MediaPlayer.create(this,R.raw.logout_zip);
+                /*MediaPlayer mediaPlayerLogOut = MediaPlayer.create(this,R.raw.logout_zip);
                 mediaPlayerLogOut.setVolume(60,60);
-                mediaPlayerLogOut.start();
+                mediaPlayerLogOut.start();*/
                 logout();
                 break;
         }

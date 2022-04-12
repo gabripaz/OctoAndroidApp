@@ -9,9 +9,9 @@ public class RunOfQuestions implements Serializable {
     private String date;
     private EnumStatus status;
     private Integer totalPoints;
-    private int id;
+    private String id;
 
-    public RunOfQuestions(ArrayList<Question> listOfQuestions, String date, EnumStatus status, Integer totalPoints, int id) {
+    public RunOfQuestions(ArrayList<Question> listOfQuestions, String date, EnumStatus status, Integer totalPoints, String id) {
         this.listOfQuestions = listOfQuestions;
         this.date = date;
         this.status = status;
@@ -19,7 +19,7 @@ public class RunOfQuestions implements Serializable {
         this.id = id;
     }
 
-    public RunOfQuestions(int id) {
+    public RunOfQuestions(String id) {
         this.id = id;
         this.date = getDate();
         this.totalPoints = 0;
@@ -43,9 +43,9 @@ public class RunOfQuestions implements Serializable {
 
     public void setTotalPoints(Integer totalPoints) {this.totalPoints = totalPoints;}
 
-    public int getId() {return id;}
+    public String getId() {return id;}
 
-    public void setId(int id) {this.id = id;}
+    public void setId(String id) {this.id = id;}
 
     public String getListofQuestionsIds(){
         ArrayList<String> questions = new ArrayList<String>();

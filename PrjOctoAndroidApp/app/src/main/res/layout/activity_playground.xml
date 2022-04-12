@@ -97,7 +97,7 @@
     <TextView
         android:id="@+id/tvKidsPoints"
         style="@style/SubTitles"
-        android:layout_width="32dp"
+        android:layout_width="100dp"
         android:layout_height="29dp"
         android:text="5665"
         app:layout_constraintBaseline_toBaselineOf="@id/tvPoints"

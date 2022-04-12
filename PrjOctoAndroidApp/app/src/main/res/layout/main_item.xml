@@ -8,7 +8,7 @@
     app:cardCornerRadius="25dp"
     android:elevation="6dp"
     app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="@color/teal_200"
+    app:cardBackgroundColor="#EB5DB7FF"
     android:layout_marginLeft="50sp"
     >
 
@@ -23,45 +23,42 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@mipmap/ic_launcher"
-            app:civ_border_color="@color/black"
+            app:civ_border_color="@color/teal_200"
             app:civ_border_width="2dp" />
+
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="@color/teal_700"
-            android:layout_toRightOf="@+id/imgDefault"
             android:layout_marginLeft="10dp"
-            />
+            android:layout_toRightOf="@+id/imgDefault"
+            android:text="Username"
+            android:textColor="@color/teal_700"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvUsername"
             android:layout_marginLeft="85sp"
-            android:orientation="horizontal"
             android:gravity="right"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="55dp"
                 android:layout_height="45dp"
                 android:layout_marginRight="5dp"
-                android:drawableLeft="@drawable/edit_icon"
                 android:backgroundTint="#BAE8E4"
-                />
+                android:drawableLeft="@drawable/edit_icon" />
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="55dp"
                 android:layout_height="45dp"
-                android:drawableLeft="@drawable/delete_icon"
                 android:backgroundTint="@color/white"
-                />
+                android:drawableLeft="@drawable/delete_icon" />
         </LinearLayout>
 
     </RelativeLayout>

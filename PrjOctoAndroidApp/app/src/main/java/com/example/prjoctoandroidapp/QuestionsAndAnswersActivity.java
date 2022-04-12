@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import model.EnumStatus;
 import model.Profile;
@@ -98,15 +99,12 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         String profileID = getIntent().getStringExtra("profileID");
         profileReference = octoDB.child(mAuth.getUid()).child("profiles").child(profileID); //Later we need to get the profile name.
 
-        //String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
-        //DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
-
         profileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
-                currentRun = new RunOfQuestions(profile.getLastFreeRunIndex());
+                currentRun = new RunOfQuestions(UUID.randomUUID().toString());
             }
 
             @Override
@@ -185,6 +183,8 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         SaveResult();
         Intent intent = new Intent(this,ProgressActivity.class);
         intent.putExtra("TotalPoints",currentRun.getTotalPoints());
+        String profileID = getIntent().getStringExtra("profileID");
+        intent.putExtra("profileID",profileID);
         startActivity(intent);
         mediaPlayerBackMusic.stop();
         finish();
@@ -198,6 +198,7 @@ public class QuestionsAndAnswersActivity extends AppCompatActivity implements Vi
         run.put("listOfQuestions", currentRun.getListofQuestionsIds());
         //run.put("date", String.valueOf(currentRun.TodaysDate()));
         profileReference.child("runs").child(String.valueOf(currentRun.getId())).setValue(run);
+        profileReference.child("points").setValue((currentRun.getTotalPoints() + profile.getPoints()));
     }
 
     /**

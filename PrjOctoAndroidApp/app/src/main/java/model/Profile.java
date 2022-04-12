@@ -56,14 +56,4 @@ public class Profile implements Serializable {
     public ArrayList<RunOfQuestions> getListOfRuns() {return listOfRuns;}
 
     public void setListOfRuns(ArrayList<RunOfQuestions> listOfRuns) {this.listOfRuns = listOfRuns;}
-
-    public Integer getLastFreeRunIndex(){
-        if (listOfRuns == null) return 0;
-        Integer index = 0;
-        for (RunOfQuestions oneRun: listOfRuns) {
-            if ( oneRun.getId() >= index)
-                index = oneRun.getId();
-        }
-        return index;
-    }
 }

@@ -27,6 +27,7 @@ public class ProgressActivity extends AppCompatActivity{
     VideoView seaVideo;
     Button btnExit;
     MediaPlayer mp;
+
     //Objects
     private FirebaseAuth mAuth; //get the current user
     private DatabaseReference octoDB; //reference to our Database
@@ -36,7 +37,6 @@ public class ProgressActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         Initialization();
-
     }
 
     private void Initialization() {
@@ -63,21 +63,19 @@ public class ProgressActivity extends AppCompatActivity{
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
         Intent intent = getIntent();
         int point = intent.getIntExtra("TotalPoints",0);
+        String profileID = intent.getStringExtra("profileID");
 
-        //mAuth = FirebaseAuth.getInstance();
-        //DatabaseReference profileReference = octoDB.child(mAuth.getUid()).child("profiles").child("0"); //Later we need to get the profile name.
-        String tempProfileID = "A4CtVkqMegTfIg1uow5NP6g40P92";// Delete!!! Did this because we dont login for test
-        DatabaseReference profileReference = octoDB.child(tempProfileID).child("profiles").child("0"); //Delete!!!
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference profileReference = octoDB.child(mAuth.getUid()).child("profiles").child(profileID); //Later we need to get the profile name.
 
         profileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
                 tvKidsName.setText(profile.getNickName());
-                int totalPoints = profile.getPoints()+point;
                 tvResult.setText(
-                        "Very good! you did "+tvResult.getText()+String.valueOf(point)+" points! " +
-                        "\n And now you have total of " + String.valueOf(totalPoints) + "points!");
+                        "Very good! you did "+ String.valueOf(point)+" points! " +
+                        "\n And now you have total of " + String.valueOf(profile.getPoints()) + " points!");
 
             }
 

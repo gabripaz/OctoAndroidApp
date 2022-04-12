@@ -1,9 +1,12 @@
 package com.example.prjoctoandroidapp;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Ringtone;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +18,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +34,22 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
     EditText edNickname, edAge;
     Button btnReturn, btnAddPlayer;
     ImageButton btnAvatarOne,btnAvatarTwo,btnAvatarThree,btnAvatarFour,btnAvatarFive,btnAvatarSix;
+
+    DatabaseReference octoDatabase;
+    //To upload the image file into Firebase database
+    FirebaseStorage storage;
+    StorageReference storageReference,sRef;
+
+    // to declare activity result launcher to call and receive
+    ActivityResultLauncher activityResultLauncher;
+
+    Uri filePath;
+
+    // follow the photo upload
+    ProgressDialog progressDialog;
+
+    String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +62,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         edAge          =   findViewById(R.id.edAge);
         btnAddPlayer   =   findViewById(R.id.btnNewPlayer);
         btnReturn      =   findViewById(R.id.btnReturnAddPlayer);
+
         btnAvatarOne   =   findViewById(R.id.imgAvatarOne);
         btnAvatarTwo   =   findViewById(R.id.imgAvatarTwo);
         btnAvatarThree =   findViewById(R.id.imgAvatarThree);
@@ -47,15 +70,26 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         btnAvatarFive  =   findViewById(R.id.imgAvatarFive);
         btnAvatarSix   =   findViewById(R.id.imgAvatarSix);
 
+        btnAvatarOne.setOnClickListener(this);
+        btnAvatarTwo.setOnClickListener(this);
+        btnAvatarThree.setOnClickListener(this);
+        btnAvatarFour.setOnClickListener(this);
+        btnAvatarFive.setOnClickListener(this);
+        btnAvatarSix.setOnClickListener(this);
+
         btnReturn.setOnClickListener(this);
         btnAddPlayer.setOnClickListener(this);
+
+        octoDatabase = FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles");
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnNewPlayer:
-                addPlayer();
+                addPlayer(filePath);
                 break;
             case R.id.btnReturnAddPlayer:
                 finish();
@@ -63,7 +97,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void addPlayer() {
+    private void addPlayer(Uri avatar) {
         String UID = "";
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
@@ -76,7 +110,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         map.put("nickName", edNickname.getText().toString());
         map.put("age", Integer.parseInt(edAge.getText().toString()));
         map.put("points", Integer.parseInt("0"));
-        map.put("avatarUrl", ""); //please insert the selected avatar
+        map.put("avatarUrl", avatar); //please insert the selected avatar
         Reward reward = new Reward("welcome",0);
         map.put("rewards", new ArrayList<Reward>(Arrays.asList(reward)));
 

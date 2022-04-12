@@ -1,5 +1,6 @@
 package com.example.prjoctoandroidapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SearchView;
@@ -26,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import model.Profile;
 import model.ProfileAdapter;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProfileAdapter profileAdapter;
     private CircleImageView circleImageView;
@@ -51,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btnAdd = findViewById(R.id.btnAdd);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setOnClickListener(this);
+
 
         FirebaseRecyclerOptions<Profile> options =
                 new FirebaseRecyclerOptions.Builder<Profile>()
@@ -115,10 +117,4 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

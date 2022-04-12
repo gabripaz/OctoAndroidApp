@@ -17,8 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import model.Reward;
 
 public class AddPlayerActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edNickname, edAge;
@@ -71,6 +75,10 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         Map<String, Object> map = new HashMap<>();
         map.put("nickName", edNickname.getText().toString());
         map.put("age", Integer.parseInt(edAge.getText().toString()));
+        map.put("points", Integer.parseInt("0"));
+        map.put("avatarUrl", ""); //please insert the selected avatar
+        Reward reward = new Reward("welcome",0);
+        map.put("rewards", new ArrayList<Reward>(Arrays.asList(reward)));
 
         FirebaseDatabase.getInstance().getReference("users").child(UID).child("profiles").push().setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -121,7 +121,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void sentToMainActivity() {
-        Intent intent = new Intent(this,MainActivity.class);
+        /*Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();*/
+
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         finish();
     }

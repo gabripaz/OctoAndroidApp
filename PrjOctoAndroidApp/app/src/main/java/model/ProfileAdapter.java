@@ -32,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdapter.myViewHolder> {
 
-    EditText uname, name, age;
+    EditText nickName, age;
     Button btnUpdate;
 
     public ProfileAdapter(@NonNull FirebaseRecyclerOptions<Profile> options) {
@@ -41,7 +41,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Profile profile) {
-        holder.username.setText(profile.getNickName());
+        holder.nName.setText(profile.getNickName());
 
         Glide.with(holder.img.getContext())
                 .load(profile.getAvatarUrl())
@@ -49,7 +49,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.img);
 
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            /*holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
@@ -69,9 +69,9 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
                 name.setText(profile.getPoints());
                 age.setText(String.valueOf(profile.getAge()));
 
-                dialogPlus.show();
+                dialogPlus.show();*/
 
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
+/*                btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Map<String, Object> map = new HashMap<>();
@@ -98,9 +98,9 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
                     }
                 });
             }
-        });
+        }); */
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        /*holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.img.getContext());
@@ -122,7 +122,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
 
                 builder.show();
             }
-        });
+        });*/
     }
 
     @NonNull
@@ -135,7 +135,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
 
     class myViewHolder extends RecyclerView.ViewHolder {
         CircleImageView img;
-        TextView username;
+        TextView nName;
 
         Button btnEdit, btnDelete;
 
@@ -143,7 +143,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
             super(itemView);
 
             img = (CircleImageView)itemView.findViewById(R.id.imgDefault);
-            username = (TextView)itemView.findViewById(R.id.tvUsername);
+            nName = (TextView)itemView.findViewById(R.id.tvUsername);
 
             btnEdit = (Button)itemView.findViewById(R.id.btnEdit);
             btnDelete =(Button)itemView.findViewById(R.id.btnDelete);

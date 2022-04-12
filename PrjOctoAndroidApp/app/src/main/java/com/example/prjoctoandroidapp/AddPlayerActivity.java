@@ -62,20 +62,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         edAge          =   findViewById(R.id.edAge);
         btnAddPlayer   =   findViewById(R.id.btnNewPlayer);
         btnReturn      =   findViewById(R.id.btnReturnAddPlayer);
-
         btnAvatarOne   =   findViewById(R.id.imgAvatarOne);
-        btnAvatarTwo   =   findViewById(R.id.imgAvatarTwo);
-        btnAvatarThree =   findViewById(R.id.imgAvatarThree);
-        btnAvatarFour  =   findViewById(R.id.imgAvatarFour);
-        btnAvatarFive  =   findViewById(R.id.imgAvatarFive);
-        btnAvatarSix   =   findViewById(R.id.imgAvatarSix);
-
-        btnAvatarOne.setOnClickListener(this);
-        btnAvatarTwo.setOnClickListener(this);
-        btnAvatarThree.setOnClickListener(this);
-        btnAvatarFour.setOnClickListener(this);
-        btnAvatarFive.setOnClickListener(this);
-        btnAvatarSix.setOnClickListener(this);
 
         btnReturn.setOnClickListener(this);
         btnAddPlayer.setOnClickListener(this);
@@ -89,15 +76,17 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnNewPlayer:
-                addPlayer(filePath);
+                addPlayer();
                 break;
             case R.id.btnReturnAddPlayer:
                 finish();
                 break;
+            case R.id.btnBrowse2:
+                break;
         }
     }
 
-    private void addPlayer(Uri avatar) {
+    private void addPlayer() {
         String UID = "";
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
@@ -106,11 +95,13 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(this, "There seems to be issues with the current session", Toast.LENGTH_LONG).show();
         }
 
+        filePath = Uri.parse("https://firebasestorage.googleapis.com/v0/b/octodatabase-1e2c1.appspot.com/o/avatar_six.png?alt=media&token=6e61b36e-62ef-4817-ad85-bf55b4986898");
+
         Map<String, Object> map = new HashMap<>();
         map.put("nickName", edNickname.getText().toString());
         map.put("age", Integer.parseInt(edAge.getText().toString()));
         map.put("points", Integer.parseInt("0"));
-        map.put("avatarUrl", avatar); //please insert the selected avatar
+        map.put("avatarUrl", filePath.toString()); //please insert the selected avatar
         Reward reward = new Reward("welcome",0);
         map.put("rewards", new ArrayList<Reward>(Arrays.asList(reward)));
 

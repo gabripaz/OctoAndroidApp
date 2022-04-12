@@ -1,8 +1,11 @@
 package model;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.prjoctoandroidapp.PlaygroundActivity;
+import com.example.prjoctoandroidapp.ProfileActivity;
 import com.example.prjoctoandroidapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -38,6 +43,12 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
 
     EditText nickName, myage;
     Button btnUpdate;
+    Context context;
+
+    public ProfileAdapter(@NonNull FirebaseRecyclerOptions<Profile> options, Context context) {
+        super(options);
+        this.context = context;
+    }
 
     public ProfileAdapter(@NonNull FirebaseRecyclerOptions<Profile> options) {
         super(options);
@@ -130,18 +141,28 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
                 builder.show();
             }
         });
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.img.getContext(), PlaygroundActivity.class);
+                view.getContext().startActivity(intent);
+
+            }
+        });
     }
 
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item, parent, false);
+        //view.setOnClickListener();
         return new myViewHolder(view);
     }
 
 
     static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private OnClickListener listener;
+
 
         CircleImageView img;
         TextView nName;

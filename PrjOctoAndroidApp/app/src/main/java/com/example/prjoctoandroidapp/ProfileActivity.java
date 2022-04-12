@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import model.Profile;
 import model.ProfileAdapter;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private ProfileAdapter profileAdapter;
     private CircleImageView circleImageView;
@@ -70,6 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvProfiles);
         tvNickname = findViewById(R.id.tvUsername);
         btnAdd = findViewById(R.id.btnAdd);
+/*
+        circleImageView.setOnClickListener(this);*/
 
         octoDatabase = FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles");
         storage = FirebaseStorage.getInstance();

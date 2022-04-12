@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class resultRVAdapter extends RecyclerView.Adapter<resultRVAdapter.ViewHolder> {
+public class ResultRVAdapter extends RecyclerView.Adapter<ResultRVAdapter.ViewHolder> {
 
     // arraylist for storing our data and context
     private ArrayList<DataModal> dataModalArrayList;
     private Context context;
 
     // constructor for our variables
-    public resultRVAdapter(ArrayList<DataModal> dataModalArrayList, Context context) {
+    public ResultRVAdapter(ArrayList<DataModal> dataModalArrayList, Context context) {
         this.dataModalArrayList = dataModalArrayList;
         this.context = context;
     }

@@ -104,11 +104,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     //Inserting the rest of the data in the database
                     String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-                    //So here I am trying to create an account with a empty profile account just to test     (no working)                               ****
                     Reward reward = new Reward("welcome",0);
-                    Profile profile = new Profile("","",0,new ArrayList<Reward>(Arrays.asList(reward)));
+                    Profile profile = new Profile("Guest","",0,new ArrayList<Reward>(Arrays.asList(reward)));
 
-                    // end , after we need to see if we can added after
                     OctoUser user = new OctoUser(username,fullName,email, new ArrayList<Profile>(Arrays.asList(profile)));
                     octoDB.child(uid).setValue(user);
                     mAuth.signOut();

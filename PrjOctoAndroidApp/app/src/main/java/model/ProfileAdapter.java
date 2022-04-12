@@ -44,6 +44,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
     EditText nickName, myage;
     Button btnUpdate;
     Context context;
+    int aProfile;
 
     public ProfileAdapter(@NonNull FirebaseRecyclerOptions<Profile> options, Context context) {
         super(options);
@@ -146,8 +147,10 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.img.getContext(), PlaygroundActivity.class);
+               String key= FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles")
+                        .child(getRef(position).getKey()).getKey();
+               intent.putExtra("key",key);
                 view.getContext().startActivity(intent);
-
             }
         });
     }

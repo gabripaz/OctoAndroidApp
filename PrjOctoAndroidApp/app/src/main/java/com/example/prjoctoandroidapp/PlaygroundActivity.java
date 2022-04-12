@@ -62,7 +62,9 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
 
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
-        profileID = "-N-SoXAIUen4myDe2rN9"; //CHANGE FOR INTENT LATER!!!
+
+       // profileID = "-N-U37-7MdGA4WTwHyYJ"; //CHANGE FOR INTENT LATER!!!
+        profileID = getIntent().getStringExtra("key");
         currentProfile = octoDB.child(mAuth.getUid()).child("profiles").child(profileID);
         currentProfile.addValueEventListener(new ValueEventListener() {
             @Override

@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/tvKidsName"
         app:layout_constraintTop_toBottomOf="@id/tvKidsName"
         android:layout_marginTop="5dp"
-        android:text="Level :" />
+        android:text="Age :" />
 
     <TextView
         style="@style/SubTitles"
@@ -83,7 +83,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/tvLevel"
         app:layout_constraintLeft_toRightOf="@id/tvLevel"
         android:layout_marginStart="20dp"
-        android:text="05" />
+        android:text="06" />
 
     <TextView
         style="@style/SubTitles"

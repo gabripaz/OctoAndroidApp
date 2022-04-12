@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,12 +48,15 @@ public class ProfileActivity extends AppCompatActivity{
     private TextView tvNickname;
     private FloatingActionButton btnAdd;
 
+
     DatabaseReference octoDatabase;
     FirebaseStorage storage;
     StorageReference storageReference, sRef;
     ActivityResultLauncher activityResultLauncher;
     Uri filePath;
     ProgressDialog progressDialog;
+
+    MediaPlayer mp;
 
     String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -72,6 +76,9 @@ public class ProfileActivity extends AppCompatActivity{
         btnAdd = findViewById(R.id.btnAdd);
 /*
         circleImageView.setOnClickListener(this);*/
+
+        mp = MediaPlayer.create(this,R.raw.kid_who_r_u);
+        mp.start();
 
         octoDatabase = FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles");
         storage = FirebaseStorage.getInstance();

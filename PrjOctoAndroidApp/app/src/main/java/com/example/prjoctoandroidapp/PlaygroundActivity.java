@@ -17,14 +17,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 
 import model.Profile;
-import model.Question;
-import model.RunOfQuestions;
 
 public class PlaygroundActivity extends AppCompatActivity implements View.OnClickListener {
 

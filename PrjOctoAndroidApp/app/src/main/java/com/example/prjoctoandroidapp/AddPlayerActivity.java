@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Ringtone;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -45,8 +44,6 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
 
     Uri filePath;
 
-    // follow the photo upload
-    ProgressDialog progressDialog;
 
     String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

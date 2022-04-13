@@ -1,7 +1,6 @@
 package model;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,18 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.prjoctoandroidapp.PlaygroundActivity;
-import com.example.prjoctoandroidapp.ProfileActivity;
 import com.example.prjoctoandroidapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnClickListener;
-import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 
 
@@ -44,7 +39,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
     EditText nickName, myage;
     Button btnUpdate;
     Context context;
-    int aProfile;
+
 
     public ProfileAdapter(@NonNull FirebaseRecyclerOptions<Profile> options, Context context) {
         super(options);

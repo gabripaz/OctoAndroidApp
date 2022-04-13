@@ -105,7 +105,7 @@
         android:layout_marginTop="20dp"
         android:textSize="25sp"
         android:backgroundTint="@color/white"
-        android:text="This App was built by: \nAlbelis Gregoria Becea Marrero\nAmanda Chrun\nGabriel Paz Paiva\nJagrut Dipakumar Gosai\nRameswariben Vipul Bhoi
+        android:text="This App was built by: \nAlbelis G Becea M\nAmanda Chrun\nGabriel Paz Paiva\nJagrut Dipakumar Gosai\nRameswariben Vipul Bhoi
 
         " />
 

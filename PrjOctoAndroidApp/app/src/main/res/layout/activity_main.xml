@@ -110,7 +110,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="35dp"
         android:layout_marginStart="15dp"
-        android:text="Manage Account"
+        android:text="Credits"
         android:background="@drawable/button_selector"
         app:backgroundTint="@null"
         />

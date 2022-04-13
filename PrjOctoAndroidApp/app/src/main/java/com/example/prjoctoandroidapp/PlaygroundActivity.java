@@ -112,7 +112,6 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         Intent intent = new Intent(this, TransitionActivity.class);
         intent.putExtra("activityType","imageExplorer");
         startActivity(intent);
-        finish();
     }
 
     private void goToQuestionsAndAnswers() {

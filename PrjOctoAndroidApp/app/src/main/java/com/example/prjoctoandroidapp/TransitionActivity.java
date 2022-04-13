@@ -66,6 +66,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void goToPlayGround() {
         Intent intent = new Intent(this, PlaygroundActivity.class);
+        intent.putExtra("key",getIntent().getStringExtra("profileID"));
         startActivity(intent);
     }
 
@@ -77,9 +78,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
-
         intent.putExtra("profileID",getIntent().getStringExtra("profileID"));
-
         startActivity(intent);
 
     }

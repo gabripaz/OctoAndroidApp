@@ -56,8 +56,9 @@ public class ProgressActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
-               intent. putExtra("activityType", "afterQuestions");
-               startActivity(intent);
+               //intent. putExtra("activityType", "afterQuestions");
+               //intent. putExtra("profileID", profile.getProfileID());
+               //startActivity(intent);
                 seaVideo.stopPlayback();
                 main.stop();
                 finish();
@@ -76,6 +77,7 @@ public class ProgressActivity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
+                profile.setProfileID(getIntent().getStringExtra("profileID"));
                 tvKidsName.setText(profile.getNickName());
                 tvResult.setText(
                         "Very good! you did "+ String.valueOf(point)+" points! " +

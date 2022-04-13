@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Profile implements Serializable {
+
+    private String profileID;
     private String nickName;
     private String avatarUrl;
     private int age;
@@ -24,14 +26,7 @@ public class Profile implements Serializable {
         this.listOfRuns = new ArrayList<RunOfQuestions>();
     }
 
-    public Profile(String nickName, String avatarUrl, int age, int points, ArrayList<Reward> rewards, ArrayList<RunOfQuestions> listOfRuns) {
-        this.nickName = nickName;
-        this.avatarUrl = avatarUrl;
-        this.age = age;
-        this.points = points;
-        this.rewards = rewards;
-        this.listOfRuns = listOfRuns;
-    }
+
 
     public String getNickName() {return nickName; }
 
@@ -56,4 +51,8 @@ public class Profile implements Serializable {
     public ArrayList<RunOfQuestions> getListOfRuns() {return listOfRuns;}
 
     public void setListOfRuns(ArrayList<RunOfQuestions> listOfRuns) {this.listOfRuns = listOfRuns;}
+
+    public String getProfileID() {return profileID;}
+
+    public void setProfileID(String profileID) {this.profileID = profileID;}
 }

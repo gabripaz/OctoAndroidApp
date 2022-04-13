@@ -98,6 +98,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         filePath = Uri.parse("https://firebasestorage.googleapis.com/v0/b/octodatabase-1e2c1.appspot.com/o/avatar_six.png?alt=media&token=6e61b36e-62ef-4817-ad85-bf55b4986898");
 
         Map<String, Object> map = new HashMap<>();
+        map.put("profileID", "");
         map.put("nickName", edNickname.getText().toString());
         map.put("age", Integer.parseInt(edAge.getText().toString()));
         map.put("points", Integer.parseInt("0"));

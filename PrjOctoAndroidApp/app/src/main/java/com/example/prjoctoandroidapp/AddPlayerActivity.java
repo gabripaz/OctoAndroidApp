@@ -122,8 +122,5 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
 
-        //THIS CODE IS ONLY FOR DEMONSTRATION PROPOSES TO DELETE OR MODIFY LATER
-        Toast.makeText(this,"Profile for "+edNickname.getText().toString()+" was added", Toast.LENGTH_LONG).show();
-        //
     }
 }

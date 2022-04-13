@@ -14,9 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-//    private TextToSpeech textToSpeech;
-//    private EditText edText;
-//    private Button btnSpeech;
+
     Button btnCreateAcc, btnLogin, btnStart, btnConfigAcc, btnLogout, btnAddPlayer;
     private FirebaseAuth mAuth;
     MediaPlayer mediaPlayerMain;
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAuth = FirebaseAuth.getInstance();
 
             MainAudioStart();
-
     }
 
     @Override
@@ -53,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case (R.id.btnLogin):
                 mediaPlayerMain.stop();
-               MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
-                mediaPlayerLogin.setVolume(60,60);
-                mediaPlayerLogin.start();
+                MediaPlayer mediaPlayerLogin = MediaPlayer.create(this,R.raw.login_waterdrop);
+                //mediaPlayerLogin.setVolume(60,60);
+                //mediaPlayerLogin.start();
                 goLogin();
                 break;
             case(R.id.btnRegister):
@@ -117,8 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void goStart() {
         Intent intent = new Intent(this,ProfileActivity.class);
-        //We need to put in the intent the id from the profile to manage easily later
-        //intent.putExtra("id":id)
         startActivity(intent);
     }
 
@@ -133,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    //TESTING FIREBASE AUTHENTICATION
      @Override
     protected void onStart() {
          super.onStart();

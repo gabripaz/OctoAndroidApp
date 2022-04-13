@@ -25,7 +25,7 @@ public class ProgressActivity extends AppCompatActivity{
 
     private TextView tvKidsName,tvResult;
     VideoView seaVideo;
-    Button btnExit;
+    Button btnExit, btnPlayAgain;
     MediaPlayer mp,main;
 
     //Objects
@@ -43,6 +43,7 @@ public class ProgressActivity extends AppCompatActivity{
         tvKidsName =  findViewById(R.id.tvKidsName);
         tvResult = findViewById(R.id.tvResult);
         seaVideo = findViewById(R.id.videoResult);
+        btnPlayAgain = findViewById(R.id.btnPlayAgain);
 
         seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.celebrateocto);
         seaVideo.start();
@@ -56,9 +57,22 @@ public class ProgressActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
-               //intent. putExtra("activityType", "afterQuestions");
-               //intent. putExtra("profileID", profile.getProfileID());
-               //startActivity(intent);
+               intent. putExtra("activityType", "afterQuestions");
+               intent. putExtra("profileID", profile.getProfileID());
+               startActivity(intent);
+                seaVideo.stopPlayback();
+                main.stop();
+                finish();
+            }
+        });
+
+        btnPlayAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
+                intent. putExtra("activityType", "questionsAnswers");
+                intent. putExtra("profileID", profile.getProfileID());
+                startActivity(intent);
                 seaVideo.stopPlayback();
                 main.stop();
                 finish();

@@ -72,6 +72,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void goToImageExplorer() {
         Intent intent = new Intent(this, ImageExploreActivity.class);
+        intent.putExtra("profileID",getIntent().getStringExtra("profileID"));
         startActivity(intent);
 
     }

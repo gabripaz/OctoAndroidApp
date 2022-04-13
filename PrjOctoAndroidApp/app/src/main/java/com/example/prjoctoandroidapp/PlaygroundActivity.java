@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -63,7 +64,6 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         octoDB  = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
-       // profileID = "-N-U37-7MdGA4WTwHyYJ"; //CHANGE FOR INTENT LATER!!!
         profileID = getIntent().getStringExtra("key");
         currentProfile = octoDB.child(mAuth.getUid()).child("profiles").child(profileID);
         currentProfile.addValueEventListener(new ValueEventListener() {
@@ -73,7 +73,7 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
                 tvKidsName.setText(profile.getNickName());
                 tvKidsLevel.setText(String.valueOf(profile.getAge()));
                 tvKidsPoints.setText(String.valueOf(profile.getPoints()));
-                //kidsAvatar.setImageDrawable(profile.getAvatarUrl());
+                Picasso.get().load(profile.getAvatarUrl()).fit().into(kidsAvatar);
             }
 
             @Override
@@ -120,7 +120,6 @@ public class PlaygroundActivity extends AppCompatActivity implements View.OnClic
         intent.putExtra("activityType","questionsAnswers");
         intent.putExtra("profileID",profileID);
         startActivity(intent);
-        finish();
     }
 
     private void backToMain() {

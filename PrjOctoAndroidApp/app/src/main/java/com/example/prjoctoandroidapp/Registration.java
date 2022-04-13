@@ -87,7 +87,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     private void createAccount() {
       if( !validateUsername() || !validateFullname()  || !validateEmail() || !validatePassword()){return;}
-//
+
         String  fullName, username, email,password;
 
         username = edUsername.getText().toString();

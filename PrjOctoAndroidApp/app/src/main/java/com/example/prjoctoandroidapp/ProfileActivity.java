@@ -79,7 +79,10 @@ public class ProfileActivity extends AppCompatActivity{
 
         mp = MediaPlayer.create(this,R.raw.kid_who_r_u);
         mp.start();
-
+        MediaPlayer mediaPlayerMain = MediaPlayer.create(this,R.raw.back_music_good);
+        mediaPlayerMain.setVolume(20,20);
+        mediaPlayerMain.setLooping(true);
+      //  mediaPlayerMain.start();
         octoDatabase = FirebaseDatabase.getInstance().getReference("users").child(user).child("profiles");
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -112,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), AddPlayerActivity.class));
+             //   mediaPlayerMain.stop();
             }
         });
     }

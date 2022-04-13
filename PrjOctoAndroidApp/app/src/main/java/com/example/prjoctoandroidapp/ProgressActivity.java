@@ -26,7 +26,7 @@ public class ProgressActivity extends AppCompatActivity{
     private TextView tvKidsName,tvResult;
     VideoView seaVideo;
     Button btnExit;
-    MediaPlayer mp;
+    MediaPlayer mp,main;
 
     //Objects
     private FirebaseAuth mAuth; //get the current user
@@ -48,6 +48,9 @@ public class ProgressActivity extends AppCompatActivity{
         seaVideo.start();
         mp = MediaPlayer.create(this,R.raw.kid_great_job_short);
         mp.start();
+        main = MediaPlayer.create(this,R.raw.cheerful_music);
+        main.setLooping(true);
+        main.start();
         btnExit = findViewById(R.id.btnExit);
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,7 @@ public class ProgressActivity extends AppCompatActivity{
                intent. putExtra("activityType", "afterQuestions");
                startActivity(intent);
                 seaVideo.stopPlayback();
+                main.stop();
                 finish();
             }
         });

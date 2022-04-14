@@ -17,7 +17,6 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -96,21 +95,23 @@ public class ImageExploreActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        prepareInputImage();
-        processImage();
 
         if(view.getId() == R.id.btnExit){
             mediaPlayerIEX.stop();
             goToPlayground();
             finish();
+        }else{
+            prepareInputImage();
+            processImage();
         }
 
     }
 
     private void goToPlayground() {
-        Intent intent = new Intent(this, TransitionActivity.class);
+        /*Intent intent = new Intent(this, TransitionActivity.class);
         intent.putExtra("activityType","afterExplorer");
-        startActivity(intent);
+        startActivity(intent);*/ //if we want to go back to
+        finish();
     }
 
     //  To process the image and finding all the objects inside an image

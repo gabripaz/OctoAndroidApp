@@ -112,19 +112,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
-        //TO BE REMOVED!!!!!!!!////////////////////
-        /*tts.setPitch(1f);
-        tts.setSpeechRate(1f);
-        tts.speak("Welcome Mister or Misses " + email, TextToSpeech.QUEUE_FLUSH, null);*/
-        ///////////////////////////////////////////
-//
     }
 
     private void sentToMainActivity() {
-        /*Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();*/
-
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         finish();
@@ -145,17 +135,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onDestroy();
     }
 
-    //TESTING FIREBASE AUTHENTICATION I might remove this later
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currUser != null){
             Toast.makeText(this,"No users register yet", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
         }
     }
-    //END TEST
 }

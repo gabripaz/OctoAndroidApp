@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -88,7 +87,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     private void createAccount() {
       if( !validateUsername() || !validateFullname()  || !validateEmail() || !validatePassword()){return;}
-//
+
         String  fullName, username, email,password;
 
         username = edUsername.getText().toString();

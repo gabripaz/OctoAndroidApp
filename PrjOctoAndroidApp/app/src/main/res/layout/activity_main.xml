@@ -39,7 +39,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-        app:srcCompat="@drawable/octologo3"
+        app:srcCompat="@mipmap/octo_logo_v3_round"
         android:contentDescription="@string/octologo"
         />
 
@@ -110,7 +110,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="35dp"
         android:layout_marginStart="15dp"
-        android:text="Manage Account"
+        android:text="Credits"
         android:background="@drawable/button_selector"
         app:backgroundTint="@null"
         />

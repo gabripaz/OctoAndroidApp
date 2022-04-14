@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -25,7 +24,7 @@ public class ProgressActivity extends AppCompatActivity{
 
     private TextView tvKidsName,tvResult;
     VideoView seaVideo;
-    Button btnExit;
+    Button btnExit, btnPlayAgain;
     MediaPlayer mp,main;
 
     //Objects
@@ -43,6 +42,7 @@ public class ProgressActivity extends AppCompatActivity{
         tvKidsName =  findViewById(R.id.tvKidsName);
         tvResult = findViewById(R.id.tvResult);
         seaVideo = findViewById(R.id.videoResult);
+        btnPlayAgain = findViewById(R.id.btnPlayAgain);
 
         seaVideo.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.celebrateocto);
         seaVideo.start();
@@ -57,7 +57,21 @@ public class ProgressActivity extends AppCompatActivity{
             public void onClick(View view) {
                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
                intent. putExtra("activityType", "afterQuestions");
+               intent. putExtra("profileID", profile.getProfileID());
                startActivity(intent);
+                seaVideo.stopPlayback();
+                main.stop();
+                finish();
+            }
+        });
+
+        btnPlayAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(view.getContext(), TransitionActivity.class);
+                intent. putExtra("activityType", "questionsAnswers");
+                intent. putExtra("profileID", profile.getProfileID());
+                startActivity(intent);
                 seaVideo.stopPlayback();
                 main.stop();
                 finish();
@@ -76,6 +90,7 @@ public class ProgressActivity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profile = snapshot.getValue(Profile.class);
+                profile.setProfileID(getIntent().getStringExtra("profileID"));
                 tvKidsName.setText(profile.getNickName());
                 tvResult.setText(
                         "Very good! you did "+ String.valueOf(point)+" points! " +

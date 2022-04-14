@@ -56,8 +56,8 @@ public class TransitionActivity extends AppCompatActivity {
                 goToQuestionsAndAnswers();
                 break;
             case "afterQuestions": case"afterExplorer":
-//                mp = MediaPlayer.create(this,R.raw.kid_great_job_short);//here can be another sound like lets play again
-//                mp.start();
+                mp = MediaPlayer.create(this,R.raw.kid_great_job_short);//here can be another sound like lets play again
+                mp.start();
                 goToPlayGround();
                 break;
 
@@ -66,20 +66,20 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void goToPlayGround() {
         Intent intent = new Intent(this, PlaygroundActivity.class);
+        intent.putExtra("key",getIntent().getStringExtra("profileID"));
         startActivity(intent);
     }
 
     private void goToImageExplorer() {
         Intent intent = new Intent(this, ImageExploreActivity.class);
+        intent.putExtra("profileID",getIntent().getStringExtra("profileID"));
         startActivity(intent);
 
     }
 
     private void goToQuestionsAndAnswers() {
         Intent intent = new Intent(this, QuestionsAndAnswersActivity.class);
-
         intent.putExtra("profileID",getIntent().getStringExtra("profileID"));
-
         startActivity(intent);
 
     }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Ringtone;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -45,8 +44,6 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
 
     Uri filePath;
 
-    // follow the photo upload
-    ProgressDialog progressDialog;
 
     String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -98,6 +95,7 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
         filePath = Uri.parse("https://firebasestorage.googleapis.com/v0/b/octodatabase-1e2c1.appspot.com/o/avatar_six.png?alt=media&token=6e61b36e-62ef-4817-ad85-bf55b4986898");
 
         Map<String, Object> map = new HashMap<>();
+        map.put("profileID", "");
         map.put("nickName", edNickname.getText().toString());
         map.put("age", Integer.parseInt(edAge.getText().toString()));
         map.put("points", Integer.parseInt("0"));
@@ -121,8 +119,5 @@ public class AddPlayerActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
 
-        //THIS CODE IS ONLY FOR DEMONSTRATION PROPOSES TO DELETE OR MODIFY LATER
-        Toast.makeText(this,"Profile for "+edNickname.getText().toString()+" was added", Toast.LENGTH_LONG).show();
-        //
     }
 }

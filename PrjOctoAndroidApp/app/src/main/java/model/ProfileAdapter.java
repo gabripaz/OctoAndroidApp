@@ -164,7 +164,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
     }
 
 
-    static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class myViewHolder extends RecyclerView.ViewHolder {
 
 
         CircleImageView img;
@@ -181,15 +181,9 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<Profile, ProfileAdap
             btnEdit = (Button)itemView.findViewById(R.id.btnEdit);
             btnDelete =(Button)itemView.findViewById(R.id.btnDelete);
 
-            itemView.setOnClickListener(this);
 
         }
 
-
-        @Override
-        public void onClick(View view) {
-            /*listener.onClick(view, getLayoutPosition());*/
-        }
     }
 
 }
